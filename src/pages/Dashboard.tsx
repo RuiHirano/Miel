@@ -14,17 +14,22 @@ const Dashboard = () => {
   // Initialize date from URL params on mount
   useEffect(() => {
     const period = searchParams.get("period");
-    const year = searchParams.get("year");
-    const month = searchParams.get("month");
 
-    if (period === "all") {
-      setSelectedDate(null);
-    } else if (year && month) {
-      const date = new Date(parseInt(year), parseInt(month) - 1);
-      setSelectedDate(date);
+    if (period) {
+      // Parse YYYYMM format
+      const year = parseInt(period.substring(0, 4));
+      const month = parseInt(period.substring(4, 6));
+      
+      if (!isNaN(year) && !isNaN(month) && month >= 1 && month <= 12) {
+        const date = new Date(year, month - 1);
+        setSelectedDate(date);
+      } else {
+        // Invalid period format, default to current month
+        setSelectedDate(new Date());
+      }
     } else {
-      // Default to current month if no params
-      setSelectedDate(new Date());
+      // No period parameter means all periods
+      setSelectedDate(null);
     }
   }, []);
 
@@ -32,16 +37,16 @@ const Dashboard = () => {
     setSelectedDate(date);
     
     // Update URL params
-    const newParams = new URLSearchParams();
-    
     if (date === null) {
-      newParams.set("period", "all");
+      // Remove period parameter for all periods
+      setSearchParams({});
     } else {
-      newParams.set("year", date.getFullYear().toString());
-      newParams.set("month", (date.getMonth() + 1).toString());
+      // Set period parameter in YYYYMM format
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const period = `${year}${month}`;
+      setSearchParams({ period });
     }
-    
-    setSearchParams(newParams);
   };
 
   return (
