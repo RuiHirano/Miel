@@ -1,9 +1,9 @@
 import { Box, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import HomeHeader from "./HomeHeader";
+import UserHeader from "./UserHeader";
 import Footer from "./Footer";
 
-const HomeLayout = () => {
+const UserLayout = () => {
   return (
     <Box
       sx={{
@@ -13,7 +13,7 @@ const HomeLayout = () => {
         backgroundColor: "background.subtle",
       }}
     >
-      <HomeHeader />
+      <UserHeader />
       <Container component="main" maxWidth="lg" sx={{ flexGrow: 1, py: 4 }}>
         <Outlet />
       </Container>
@@ -22,4 +22,4 @@ const HomeLayout = () => {
   );
 };
 
-export default HomeLayout;
+export default UserLayout;
