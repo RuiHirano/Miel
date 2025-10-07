@@ -7,7 +7,7 @@ declare module "@mui/material/styles" {
   interface TypeBackground {
     subtle?: string;
   }
-  
+
   interface Palette {
     chart?: {
       income: string;
@@ -15,7 +15,7 @@ declare module "@mui/material/styles" {
       neutral: string;
     };
   }
-  
+
   interface PaletteOptions {
     chart?: {
       income: string;
@@ -28,8 +28,8 @@ declare module "@mui/material/styles" {
 // カスタムカラーパレット
 const customColors = {
   primary: {
-    main: "#1976d2", // MUI default blue
-    light: "#42a5f5",
+    main: "#319af1ff", // MUI default blue
+    light: "#3aa0f4ff",
     dark: "#1565c0",
   },
   secondary: {
@@ -61,13 +61,14 @@ const customColors = {
 
 // チャート用カラーパレット
 const chartColors = {
-  income: "#2AA693",   // 収入（緑）
-  expense: "#DC2626",  // 支出（赤）  
-  neutral: "#4B5563",  // 中立（グレー）
+  income: "#16c2a8ff", // 収入（緑）
+  expense: "#eb4b4bff", // 支出（赤）
+  neutral: "#4B5563", // 中立（グレー）
 };
 
 const customTypography = {
-  fontFamily: '"Noto Sans JP", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily:
+    '"Noto Sans JP", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif',
   h1: {
     fontWeight: 700,
   },

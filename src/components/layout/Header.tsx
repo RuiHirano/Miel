@@ -7,7 +7,7 @@ const Header = () => {
       position="static"
       sx={{
         backgroundColor: "primary.main",
-        color: "primary.contrastText",
+        color: "white",
         boxShadow: 2,
       }}
     >
@@ -18,6 +18,7 @@ const Header = () => {
           sx={{
             flexGrow: 1,
             color: "inherit",
+            fontWeight: "bold",
           }}
         >
           Miel
