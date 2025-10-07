@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import AllTransactionsSection from "../components/dashboard/AllTransactionsSection";
 import CashFlowSection from "../components/dashboard/CashFlowSection";
 import MonthlyBalanceSection from "../components/dashboard/MonthlyBalanceSection";
+import AIFeedbackSection from "../components/dashboard/AIFeedbackSection";
 
 const Dashboard = () => {
   return (
@@ -10,6 +11,7 @@ const Dashboard = () => {
         <MonthlyBalanceSection />
         <CashFlowSection />
         <AllTransactionsSection />
+        <AIFeedbackSection />
       </Stack>
     </Box>
   );
