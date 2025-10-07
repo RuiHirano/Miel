@@ -61,6 +61,7 @@ const AllTransactionsSection = () => {
       title="全ての出入金"
       description="最近の取引履歴を一覧で確認し、詳細を管理できます"
       icon={<ReceiptLongIcon />}
+      expandable
     >
       <TableContainer component={Paper}>
         <Table aria-label="取引履歴テーブル">
@@ -99,9 +100,10 @@ const AllTransactionsSection = () => {
                     variant="body2"
                     fontWeight="medium"
                     sx={{
-                      color: transaction.type === "income"
-                        ? theme.palette.chart?.income || "#2AA693"
-                        : theme.palette.chart?.expense || "#DC2626"
+                      color:
+                        transaction.type === "income"
+                          ? theme.palette.chart?.income || "#2AA693"
+                          : theme.palette.chart?.expense || "#DC2626",
                     }}
                   >
                     {formatAmount(transaction.amount, transaction.type)}
@@ -113,12 +115,14 @@ const AllTransactionsSection = () => {
                     size="small"
                     variant="outlined"
                     sx={{
-                      borderColor: transaction.type === "income"
-                        ? theme.palette.chart?.income || "#2AA693"
-                        : theme.palette.chart?.expense || "#DC2626",
-                      color: transaction.type === "income"
-                        ? theme.palette.chart?.income || "#2AA693"
-                        : theme.palette.chart?.expense || "#DC2626"
+                      borderColor:
+                        transaction.type === "income"
+                          ? theme.palette.chart?.income || "#2AA693"
+                          : theme.palette.chart?.expense || "#DC2626",
+                      color:
+                        transaction.type === "income"
+                          ? theme.palette.chart?.income || "#2AA693"
+                          : theme.palette.chart?.expense || "#DC2626",
                     }}
                   />
                 </TableCell>

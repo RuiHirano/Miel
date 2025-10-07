@@ -111,6 +111,8 @@ const AIFeedbackSection = () => {
       title="AIからのフィードバック"
       description="お客様の収支データを分析し、パーソナライズされたアドバイスを提供します"
       icon={<PsychologyIcon />}
+      expandable={true}
+      maxHeight={500}
     >
       <Stack spacing={2}>
         {sortedFeedbacks.map((feedback) => (
