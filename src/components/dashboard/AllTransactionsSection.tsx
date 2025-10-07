@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -18,7 +17,6 @@ import SectionContainer from "../common/SectionContainer";
 import {
   mockTransactions,
   getCategoryName,
-  getCategoryIcon,
 } from "../../domains/transaction/mock";
 import { useState } from "react";
 
@@ -87,12 +85,9 @@ const AllTransactionsSection = () => {
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <span>{getCategoryIcon(transaction.categoryId)}</span>
-                    <Typography variant="body2">
-                      {getCategoryName(transaction.categoryId)}
-                    </Typography>
-                  </Box>
+                  <Typography variant="body2">
+                    {getCategoryName(transaction.categoryId)}
+                  </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography variant="body2">
