@@ -7,6 +7,22 @@ declare module "@mui/material/styles" {
   interface TypeBackground {
     subtle?: string;
   }
+  
+  interface Palette {
+    chart?: {
+      income: string;
+      expense: string;
+      neutral: string;
+    };
+  }
+  
+  interface PaletteOptions {
+    chart?: {
+      income: string;
+      expense: string;
+      neutral: string;
+    };
+  }
 }
 
 // カスタムカラーパレット
@@ -41,6 +57,13 @@ const customColors = {
     light: "#64b5f6",
     dark: "#1976d2",
   },
+};
+
+// チャート用カラーパレット
+const chartColors = {
+  income: "#2AA693",   // 収入（緑）
+  expense: "#DC2626",  // 支出（赤）  
+  neutral: "#4B5563",  // 中立（グレー）
 };
 
 const customTypography = {
@@ -79,6 +102,7 @@ export const lightTheme: Theme = createTheme({
     error: customColors.error,
     warning: customColors.warning,
     info: customColors.info,
+    chart: chartColors,
     background: {
       default: "#ffffff",
       paper: "#ffffff",
@@ -109,6 +133,7 @@ export const darkTheme: Theme = createTheme({
     error: customColors.error,
     warning: customColors.warning,
     info: customColors.info,
+    chart: chartColors,
     background: {
       default: "#121212",
       paper: "#1e1e1e",

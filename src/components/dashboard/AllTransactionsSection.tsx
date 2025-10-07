@@ -11,6 +11,7 @@ import {
   Typography,
   Pagination,
   Stack,
+  useTheme,
 } from "@mui/material";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import SectionContainer from "../common/SectionContainer";
@@ -22,6 +23,7 @@ import {
 import { useState } from "react";
 
 const AllTransactionsSection = () => {
+  const theme = useTheme();
   const [page, setPage] = useState(1);
   const itemsPerPage = 50;
 
@@ -62,8 +64,8 @@ const AllTransactionsSection = () => {
       description="最近の取引履歴を一覧で確認し、詳細を管理できます"
       icon={<ReceiptLongIcon />}
     >
-      <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
-        <Table stickyHeader aria-label="取引履歴テーブル">
+      <TableContainer component={Paper}>
+        <Table aria-label="取引履歴テーブル">
           <TableHead>
             <TableRow>
               <TableCell>日時</TableCell>
@@ -101,11 +103,11 @@ const AllTransactionsSection = () => {
                   <Typography
                     variant="body2"
                     fontWeight="medium"
-                    color={
-                      transaction.type === "income"
-                        ? "success.main"
-                        : "error.main"
-                    }
+                    sx={{
+                      color: transaction.type === "income"
+                        ? theme.palette.chart?.income || "#2AA693"
+                        : theme.palette.chart?.expense || "#DC2626"
+                    }}
                   >
                     {formatAmount(transaction.amount, transaction.type)}
                   </Typography>
@@ -114,8 +116,15 @@ const AllTransactionsSection = () => {
                   <Chip
                     label={transaction.type === "income" ? "収入" : "支出"}
                     size="small"
-                    color={transaction.type === "income" ? "success" : "error"}
                     variant="outlined"
+                    sx={{
+                      borderColor: transaction.type === "income"
+                        ? theme.palette.chart?.income || "#2AA693"
+                        : theme.palette.chart?.expense || "#DC2626",
+                      color: transaction.type === "income"
+                        ? theme.palette.chart?.income || "#2AA693"
+                        : theme.palette.chart?.expense || "#DC2626"
+                    }}
                   />
                 </TableCell>
               </TableRow>

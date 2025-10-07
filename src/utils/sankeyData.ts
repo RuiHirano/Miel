@@ -1,4 +1,5 @@
 import { mockTransactions, getCategoryName } from "../domains/transaction/mock";
+import { lightTheme } from "../theme/theme";
 
 export interface SankeyNode {
   id: string;
@@ -46,14 +47,14 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      nodeColor: "#1976d2", // 収入は青色
+      nodeColor: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
     });
   });
 
   // 中央の「資金」ノード
   nodes.push({
     id: "資金",
-    nodeColor: "#757575", // グレー色
+    nodeColor: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
   });
 
   // 支出カテゴリのノード
@@ -64,7 +65,7 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      nodeColor: "#d32f2f", // 支出は赤色
+      nodeColor: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
     });
   });
 
