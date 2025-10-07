@@ -1,13 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { Box } from "@mui/material";
+import HeroSection from "../components/home/HeroSection";
+import AboutSection from "../components/home/AboutSection";
+import FeaturesSection from "../components/home/FeaturesSection";
+import CTASection from "../components/home/CTASection";
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <h1>ホーム画面</h1>
-      <button onClick={() => navigate('/login')}>ログインへ</button>
-    </div>
+    <Box>
+      <HeroSection />
+      <AboutSection />
+      <FeaturesSection />
+      <CTASection />
+    </Box>
   );
 };
 

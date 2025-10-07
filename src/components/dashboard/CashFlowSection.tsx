@@ -160,7 +160,7 @@ const CashFlowSection = () => {
               from: "color",
               modifiers: [["darker", 0.8]],
             }}
-            nodeBorderRadius={3}
+            nodeBorderRadius={2}
             linkOpacity={0.5}
             linkContract={3}
             enableLinkGradient={false}
