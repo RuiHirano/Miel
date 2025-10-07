@@ -1,13 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { Box, Stack } from "@mui/material";
+import AllTransactionsSection from "../components/dashboard/AllTransactionsSection";
+import CashFlowSection from "../components/dashboard/CashFlowSection";
+import MonthlyBalanceSection from "../components/dashboard/MonthlyBalanceSection";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <h1>ダッシュボード画面</h1>
-      <button onClick={() => navigate('/')}>ホームへ戻る</button>
-    </div>
+    <Box>
+      <Stack spacing={3}>
+        <MonthlyBalanceSection />
+        <CashFlowSection />
+        <AllTransactionsSection />
+      </Stack>
+    </Box>
   );
 };
 

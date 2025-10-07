@@ -37,7 +37,7 @@ const customColors = {
 };
 
 const customTypography = {
-  fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily: '"Noto Sans JP", "Noto Sans", "Roboto", "Helvetica", "Arial", sans-serif',
   h1: {
     fontWeight: 700,
   },
