@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 import {
@@ -10,6 +10,7 @@ import {
 
 const MonthlyTrendChart = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const barData = transformToBarData(mockMonthlyData);
   const lineData = transformToLineData(mockMonthlyData);
 
@@ -21,7 +22,12 @@ const MonthlyTrendChart = () => {
           data={barData}
           keys={["収入", "支出"]}
           indexBy="month"
-          margin={{ top: 50, right: 80, bottom: 100, left: 80 }}
+          margin={{ 
+            top: 50, 
+            right: isMobile ? 20 : 80, 
+            bottom: 100, 
+            left: isMobile ? 40 : 80 
+          }}
           padding={0.3}
           valueScale={{ type: "linear", min: -800000, max: 800000 }}
           indexScale={{ type: "band", round: true }}
@@ -71,7 +77,12 @@ const MonthlyTrendChart = () => {
       >
         <ResponsiveLine
           data={lineData}
-          margin={{ top: 50, right: 80, bottom: 100, left: 80 }}
+          margin={{ 
+            top: 50, 
+            right: isMobile ? 20 : 80, 
+            bottom: 100, 
+            left: isMobile ? 40 : 80 
+          }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",

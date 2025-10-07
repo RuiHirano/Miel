@@ -143,7 +143,12 @@ const CashFlowSection = () => {
         >
           <ResponsiveSankey
             data={sankeyData}
-            margin={{ top: 40, right: 80, bottom: 40, left: 50 }}
+            margin={{
+              top: 20,
+              right: isMobile ? 40 : 80,
+              bottom: 20,
+              left: isMobile ? 30 : 50,
+            }}
             align="justify"
             colors={(node) => node.nodeColor || "#757575"}
             nodeOpacity={1}
@@ -163,13 +168,13 @@ const CashFlowSection = () => {
             linkTooltip={() => null}
             labelPosition="outside"
             labelOrientation="horizontal"
-            labelPadding={16}
+            labelPadding={isMobile ? 8 : 16}
             labelTextColor={{
               from: "color",
               modifiers: [["darker", 1]],
             }}
             legends={[]}
-            animate={true}
+            animate={false}
             motionConfig="wobbly"
           />
         </Box>
