@@ -23,7 +23,7 @@ const CashFlowSection = () => {
           data={sankeyData}
           margin={{ top: 40, right: 80, bottom: 40, left: 50 }}
           align="justify"
-          colors={{ scheme: "category10" }}
+          colors={(node) => node.nodeColor || "#757575"}
           nodeOpacity={1}
           nodeHoverOthersOpacity={0.35}
           nodeThickness={18}
