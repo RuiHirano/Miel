@@ -1,29 +1,30 @@
 import {
-  Button,
-  Menu,
-  MenuItem,
+  Add as AddIcon,
+  Business as BusinessIcon,
+  Check as CheckIcon,
+  ExpandMore as ExpandMoreIcon,
+  Home as HomeIcon,
+  Person as PersonIcon,
+} from "@mui/icons-material";
+import {
   Box,
+  Button,
   Divider,
   ListItemIcon,
+  Menu,
+  MenuItem,
   Typography,
 } from "@mui/material";
-import {
-  ExpandMore as ExpandMoreIcon,
-  Business as BusinessIcon,
-  Person as PersonIcon,
-  Home as HomeIcon,
-  Check as CheckIcon,
-  Add as AddIcon,
-} from "@mui/icons-material";
 import { useState } from "react";
 import { mockOrganizations } from "../../domains/organization/mock";
-import { Organization } from "../../domains/organization/types";
 
 interface OrganizationSelectorProps {
   variant?: "dark" | "light";
 }
 
-const OrganizationSelector = ({ variant = "dark" }: OrganizationSelectorProps) => {
+const OrganizationSelector = ({
+  variant = "dark",
+}: OrganizationSelectorProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedOrg, setSelectedOrg] = useState(mockOrganizations[0]);
   const open = Boolean(anchorEl);
@@ -59,9 +60,13 @@ const OrganizationSelector = ({ variant = "dark" }: OrganizationSelectorProps) =
         endIcon={<ExpandMoreIcon />}
         sx={{
           color: isDark ? "inherit" : "text.primary",
-          backgroundColor: isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.05)",
+          backgroundColor: isDark
+            ? "rgba(255, 255, 255, 0.15)"
+            : "rgba(0, 0, 0, 0.05)",
           "&:hover": {
-            backgroundColor: isDark ? "rgba(255, 255, 255, 0.25)" : "rgba(0, 0, 0, 0.1)",
+            backgroundColor: isDark
+              ? "rgba(255, 255, 255, 0.25)"
+              : "rgba(0, 0, 0, 0.1)",
           },
           borderRadius: 2,
           px: 2,
@@ -101,7 +106,7 @@ const OrganizationSelector = ({ variant = "dark" }: OrganizationSelectorProps) =
             組織を選択
           </Typography>
         </MenuItem>
-        
+
         {mockOrganizations.map((org) => (
           <MenuItem
             key={org.id}
@@ -133,9 +138,9 @@ const OrganizationSelector = ({ variant = "dark" }: OrganizationSelectorProps) =
             )}
           </MenuItem>
         ))}
-        
+
         <Divider />
-        
+
         <MenuItem
           sx={{
             py: 1.5,
@@ -145,9 +150,7 @@ const OrganizationSelector = ({ variant = "dark" }: OrganizationSelectorProps) =
           <ListItemIcon sx={{ minWidth: 36 }}>
             <AddIcon color="primary" fontSize="small" />
           </ListItemIcon>
-          <Typography variant="body2">
-            新しい組織を作成
-          </Typography>
+          <Typography variant="body2">新しい組織を作成</Typography>
         </MenuItem>
       </Menu>
     </>

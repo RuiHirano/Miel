@@ -1,19 +1,18 @@
 import {
-  Box,
-  Paper,
-  IconButton,
-  Typography,
-  Stack,
-  Button,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import {
+  CalendarMonth as CalendarMonthIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  CalendarMonth as CalendarMonthIcon,
   Today as TodayIcon,
 } from "@mui/icons-material";
+import {
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
 interface MonthSelectorProps {
@@ -112,8 +111,10 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
       >
         {/* Left side - Month navigation */}
         <Stack direction="row" alignItems="center" spacing={1}>
-          <CalendarMonthIcon sx={{ mr: 1, fontSize: 28, color: "primary.main" }} />
-          
+          <CalendarMonthIcon
+            sx={{ mr: 1, fontSize: 28, color: "primary.main" }}
+          />
+
           <IconButton
             onClick={handlePreviousMonth}
             size="large"
@@ -189,7 +190,7 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
             key={month.offset}
             onClick={() => handleMonthSelect(month.offset)}
             selected={
-              selectedDate &&
+              selectedDate !== null &&
               month.date.getFullYear() === selectedDate.getFullYear() &&
               month.date.getMonth() === selectedDate.getMonth()
             }
@@ -198,7 +199,6 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
           </MenuItem>
         ))}
       </Menu>
-
     </Paper>
   );
 };
