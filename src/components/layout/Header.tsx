@@ -1,4 +1,5 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import OrganizationSelector from "../common/OrganizationSelector";
 
 const Header = () => {
   return (
@@ -21,6 +22,9 @@ const Header = () => {
         >
           Miel
         </Typography>
+
+        {/* Organization Selector - Right side */}
+        <OrganizationSelector variant="dark" />
       </Toolbar>
     </AppBar>
   );
