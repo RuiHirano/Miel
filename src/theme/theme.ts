@@ -2,6 +2,13 @@ import type { PaletteMode } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import type { Theme } from "@mui/material/styles";
 
+// Material-UIのテーマ型を拡張
+declare module "@mui/material/styles" {
+  interface TypeBackground {
+    subtle?: string;
+  }
+}
+
 // カスタムカラーパレット
 const customColors = {
   primary: {
@@ -75,6 +82,7 @@ export const lightTheme: Theme = createTheme({
     background: {
       default: "#ffffff",
       paper: "#ffffff",
+      subtle: "#f0f8ff", // primary.lightより薄い青色
     },
     text: {
       primary: "#212121",
@@ -104,6 +112,7 @@ export const darkTheme: Theme = createTheme({
     background: {
       default: "#121212",
       paper: "#1e1e1e",
+      subtle: "#1a1a2e", // ダークモード用の薄い青色
     },
     text: {
       primary: "#ffffff",

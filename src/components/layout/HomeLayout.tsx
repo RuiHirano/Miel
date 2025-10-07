@@ -10,6 +10,7 @@ const HomeLayout = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        backgroundColor: "background.subtle",
       }}
     >
       <Header />
