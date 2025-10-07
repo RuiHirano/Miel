@@ -1,4 +1,11 @@
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { ResponsiveSankey } from "@nivo/sankey";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
@@ -9,6 +16,8 @@ import { createSankeyData } from "../../utils/sankeyData";
 import { mockTransactions } from "../../domains/transaction/mock";
 
 const CashFlowSection = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const sankeyData = createSankeyData(2024, 1);
 
   // Calculate totals for the current month
@@ -18,11 +27,11 @@ const CashFlowSection = () => {
   });
 
   const totalIncome = monthTransactions
-    .filter(txn => txn.type === "income")
+    .filter((txn) => txn.type === "income")
     .reduce((sum, txn) => sum + txn.amount, 0);
 
   const totalExpense = monthTransactions
-    .filter(txn => txn.type === "expense")
+    .filter((txn) => txn.type === "expense")
     .reduce((sum, txn) => sum + txn.amount, 0);
 
   const balance = totalIncome - totalExpense;
@@ -42,7 +51,11 @@ const CashFlowSection = () => {
     >
       <Stack spacing={2}>
         {/* Summary Cards */}
-        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+        <Stack
+          direction={isMobile ? "column" : "row"}
+          spacing={2}
+          sx={{ mb: 2 }}
+        >
           <Paper
             elevation={0}
             sx={{
@@ -54,7 +67,11 @@ const CashFlowSection = () => {
           >
             <Stack direction="row" alignItems="center" spacing={1}>
               <TrendingUpIcon sx={{ color: "chart.income", fontSize: 20 }} />
-              <Typography variant="body2" color="text.secondary" fontWeight="bold">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                fontWeight="bold"
+              >
                 収入
               </Typography>
             </Stack>
@@ -74,7 +91,11 @@ const CashFlowSection = () => {
           >
             <Stack direction="row" alignItems="center" spacing={1}>
               <TrendingDownIcon sx={{ color: "chart.expense", fontSize: 20 }} />
-              <Typography variant="body2" color="text.secondary" fontWeight="bold">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                fontWeight="bold"
+              >
                 支出
               </Typography>
             </Stack>
@@ -93,8 +114,17 @@ const CashFlowSection = () => {
             }}
           >
             <Stack direction="row" alignItems="center" spacing={1}>
-              <AccountBalanceIcon sx={{ color: balance >= 0 ? "chart.income" : "chart.expense", fontSize: 20 }} />
-              <Typography variant="body2" color="text.secondary" fontWeight="bold">
+              <AccountBalanceIcon
+                sx={{
+                  color: balance >= 0 ? "chart.income" : "chart.expense",
+                  fontSize: 20,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                fontWeight="bold"
+              >
                 収支
               </Typography>
             </Stack>
