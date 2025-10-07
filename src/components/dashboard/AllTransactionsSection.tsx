@@ -20,7 +20,11 @@ import {
 } from "../../domains/transaction/mock";
 import { useState } from "react";
 
-const AllTransactionsSection = () => {
+interface AllTransactionsSectionProps {
+  selectedDate: Date | null;
+}
+
+const AllTransactionsSection = ({ selectedDate }: AllTransactionsSectionProps) => {
   const theme = useTheme();
   const [page, setPage] = useState(1);
   const itemsPerPage = 50;
@@ -56,10 +60,27 @@ const AllTransactionsSection = () => {
     }).format(new Date(date));
   };
 
+  const getTitle = () => {
+    if (!selectedDate) {
+      return "全ての出入金";
+    }
+    const month = selectedDate.getMonth() + 1;
+    return `${month}月の出入金`;
+  };
+
+  const getDescription = () => {
+    if (!selectedDate) {
+      return "全期間の取引履歴を一覧で確認し、詳細を管理できます";
+    }
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth() + 1;
+    return `${year}年${month}月の取引履歴を一覧で確認し、詳細を管理できます`;
+  };
+
   return (
     <SectionContainer
-      title="全ての出入金"
-      description="最近の取引履歴を一覧で確認し、詳細を管理できます"
+      title={getTitle()}
+      description={getDescription()}
       icon={<ReceiptLongIcon />}
       expandable
     >
