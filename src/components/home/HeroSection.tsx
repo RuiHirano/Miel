@@ -235,11 +235,7 @@ const HeroSection = () => {
                   justifyContent: "center",
                   boxShadow: "0 8px 20px rgba(6, 182, 212, 0.3)",
                 }}
-              >
-                <Typography variant="body2" color="white" fontWeight={600}>
-                  ¥
-                </Typography>
-              </Box>
+              ></Box>
 
               <Box
                 sx={{
@@ -256,11 +252,7 @@ const HeroSection = () => {
                   justifyContent: "center",
                   boxShadow: "0 8px 20px rgba(245, 158, 11, 0.3)",
                 }}
-              >
-                <Typography variant="body2" color="white" fontWeight={600}>
-                  %
-                </Typography>
-              </Box>
+              ></Box>
             </Box>
 
             {/* Background decorative shapes */}

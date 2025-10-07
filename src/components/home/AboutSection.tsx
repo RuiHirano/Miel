@@ -109,7 +109,7 @@ const AboutSection = () => {
                   What's Miel?
                 </Typography>
               </Box>
-              
+
               <Typography
                 variant="h2"
                 component="h2"
@@ -126,7 +126,7 @@ const AboutSection = () => {
                 <br />
                 豊かな暮らしを実現します
               </Typography>
-              
+
               <Typography
                 variant="h6"
                 textAlign={isMobile ? "center" : "left"}
@@ -145,7 +145,7 @@ const AboutSection = () => {
               </Typography>
             </Stack>
           </Box>
-          
+
           {/* Right Visual */}
           <Box
             flex={1}
@@ -180,15 +180,15 @@ const AboutSection = () => {
                   zIndex: 2,
                 }}
               >
-                <BarChartIcon 
-                  sx={{ 
-                    fontSize: { xs: 32, md: 40 }, 
+                <BarChartIcon
+                  sx={{
+                    fontSize: { xs: 32, md: 40 },
                     color: "#06b6d4",
                     mb: 1,
-                  }} 
+                  }}
                 />
-                <Typography 
-                  variant="body2" 
+                <Typography
+                  variant="body2"
                   fontWeight={600}
                   color="#06b6d4"
                   textAlign="center"
@@ -224,15 +224,15 @@ const AboutSection = () => {
                   zIndex: 2,
                 }}
               >
-                <TrendingUpIcon 
-                  sx={{ 
-                    fontSize: { xs: 32, md: 40 }, 
+                <TrendingUpIcon
+                  sx={{
+                    fontSize: { xs: 32, md: 40 },
                     color: "#0891b2",
                     mb: 1,
-                  }} 
+                  }}
                 />
-                <Typography 
-                  variant="body2" 
+                <Typography
+                  variant="body2"
                   fontWeight={600}
                   color="#0891b2"
                   textAlign="center"
@@ -260,6 +260,41 @@ const AboutSection = () => {
               }}
             />
 
+            {/* Floating decorative elements */}
+            <Box
+              sx={{
+                position: "absolute",
+                top: "10%",
+                left: "-10%",
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                bgcolor: "#10b981",
+                opacity: 0.7,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 20px rgba(16, 185, 129, 0.3)",
+              }}
+            ></Box>
+
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: "20%",
+                right: "-10%",
+                width: 45,
+                height: 45,
+                borderRadius: "50%",
+                bgcolor: "#f59e0b",
+                opacity: 0.8,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 20px rgba(245, 158, 11, 0.3)",
+              }}
+            ></Box>
+
             {/* Background decorative elements */}
             <Box
               sx={{
@@ -269,8 +304,8 @@ const AboutSection = () => {
                 width: 40,
                 height: 40,
                 borderRadius: "50%",
-                bgcolor: "#06b6d4",
-                opacity: 0.2,
+                bgcolor: "#8b5cf6",
+                opacity: 0.4,
                 display: { xs: "none", md: "block" },
               }}
             />
@@ -282,8 +317,22 @@ const AboutSection = () => {
                 width: 30,
                 height: 30,
                 borderRadius: "50%",
-                bgcolor: "#0891b2",
-                opacity: 0.3,
+                bgcolor: "#06b6d4",
+                opacity: 0.5,
+                display: { xs: "none", md: "block" },
+              }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: "60%",
+                left: "10%",
+                width: 0,
+                height: 0,
+                borderLeft: "20px solid transparent",
+                borderRight: "20px solid transparent",
+                borderBottom: "35px solid #10b981",
+                opacity: 0.4,
                 display: { xs: "none", md: "block" },
               }}
             />
