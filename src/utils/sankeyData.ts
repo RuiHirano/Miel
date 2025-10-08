@@ -70,6 +70,18 @@ export const createSankeyData = (
     });
   });
 
+  // 「貯蓄」ノードの追加
+  nodes.push({
+    id: "貯蓄",
+    color: "#2AA693", // 貯蓄用の色
+  });
+
+  // 「不足」ノードの追加
+  nodes.push({
+    id: "不足",
+    color: "#DC2626", // 不足用の色
+  });
+
   // リンクの作成
   const links: SankeyLink[] = [];
 
@@ -108,6 +120,36 @@ export const createSankeyData = (
       });
     }
   });
+
+  const totalIncomeAmount = incomeTransactions.reduce(
+    (sum, txn) => sum + txn.amount,
+    0
+  );
+  const totalExpenseAmount = expenseTransactions.reduce(
+    (sum, txn) => sum + txn.amount,
+    0
+  );
+  const balanceAmount = totalIncomeAmount - totalExpenseAmount;
+
+  if (balanceAmount > 0) {
+    // 収支から貯蓄へのリンク
+    links.push({
+      source: "収支",
+      target: "貯蓄",
+      value: balanceAmount,
+      startColor: "#2AA693",
+      endColor: "#2AA693",
+    });
+  } else if (balanceAmount < 0) {
+    // 不足から収支へのリンク
+    links.push({
+      source: "不足",
+      target: "収支",
+      value: -balanceAmount, // 絶対値
+      startColor: "#ef5350",
+      endColor: "#ef5350",
+    });
+  }
 
   return { nodes, links };
 };
@@ -168,8 +210,20 @@ export const createSankeyDataByDescription = (
   expenseDescriptions.forEach((description) => {
     nodes.push({
       id: description,
-      color: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
+      color: lightTheme.palette.chart?.expense || "#ef5350", // 支出は赤色
     });
+  });
+
+  // 「貯蓄」ノードの追加
+  nodes.push({
+    id: "貯蓄",
+    color: "#2AA693", // 貯蓄用の色
+  });
+
+  // 「不足」ノードの追加
+  nodes.push({
+    id: "不足",
+    color: "#ef5350", // 不足用の色
   });
 
   // リンクの作成
@@ -208,6 +262,36 @@ export const createSankeyDataByDescription = (
       });
     }
   });
+
+  const totalIncomeAmount = incomeTransactions.reduce(
+    (sum, txn) => sum + txn.amount,
+    0
+  );
+  const totalExpenseAmount = expenseTransactions.reduce(
+    (sum, txn) => sum + txn.amount,
+    0
+  );
+  const balanceAmount = totalIncomeAmount - totalExpenseAmount;
+
+  if (balanceAmount > 0) {
+    // 収支から貯蓄へのリンク
+    links.push({
+      source: "収支",
+      target: "貯蓄",
+      value: balanceAmount,
+      startColor: "#2AA693",
+      endColor: "#2AA693",
+    });
+  } else if (balanceAmount < 0) {
+    // 不足から収支へのリンク
+    links.push({
+      source: "不足",
+      target: "収支",
+      value: -balanceAmount, // 絶対値
+      startColor: "#ef5350",
+      endColor: "#ef5350",
+    });
+  }
 
   return { nodes, links };
 };
