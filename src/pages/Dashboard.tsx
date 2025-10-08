@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography, CircularProgress, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getCurrentUser } from "aws-amplify/auth";
@@ -7,14 +7,23 @@ import CashFlowSection from "../components/dashboard/CashFlowSection";
 import MonthlyBalanceSection from "../components/dashboard/MonthlyBalanceSection";
 import AIFeedbackSection from "../components/dashboard/AIFeedbackSection";
 import MonthSelector from "../components/dashboard/MonthSelector";
+import { useOrganization } from "../hooks/useOrganization";
+import { useDemoMode } from "../contexts/DemoModeContext";
 
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const { currentOrganization, loading, error } = useOrganization();
+  const { isDemo } = useDemoMode();
 
-  // Check authentication on mount
+  // Check authentication on mount (skip in demo mode)
   useEffect(() => {
     const checkAuth = async () => {
+      if (isDemo) {
+        // Skip auth check in demo mode
+        return;
+      }
+      
       try {
         await getCurrentUser();
       } catch (error) {
@@ -24,7 +33,7 @@ const Dashboard = () => {
     };
 
     checkAuth();
-  }, []);
+  }, [isDemo]);
 
   // Initialize date from URL params on mount
   useEffect(() => {
@@ -64,9 +73,39 @@ const Dashboard = () => {
     }
   };
 
+  // Show loading state
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <Box>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      </Box>
+    );
+  }
+
   return (
     <Box>
       <Stack spacing={3}>
+        {currentOrganization && (
+          <Box>
+            <Typography variant="h4" component="h1" gutterBottom>
+              {currentOrganization.displayName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {currentOrganization.description}
+            </Typography>
+          </Box>
+        )}
         <MonthlyBalanceSection />
         <MonthSelector 
           selectedDate={selectedDate}

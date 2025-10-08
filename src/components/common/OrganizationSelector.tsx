@@ -15,8 +15,12 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useOrganization } from "../../hooks/useOrganization";
 import { mockOrganizations } from "../../domains/organization/mock";
+import { useDemoMode } from "../../contexts/DemoModeContext";
+import { OrganizationService } from "../../core/database";
+import { useDatabase } from "../../hooks/useDatabase";
 
 interface OrganizationSelectorProps {
   variant?: "dark" | "light";
@@ -26,8 +30,31 @@ const OrganizationSelector = ({
   variant = "dark",
 }: OrganizationSelectorProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedOrg, setSelectedOrg] = useState(mockOrganizations[0]);
+  const [organizations, setOrganizations] = useState(mockOrganizations);
+  const { currentOrganization, switchOrganization } = useOrganization();
+  const { isDemo } = useDemoMode();
+  const { isReady } = useDatabase();
   const open = Boolean(anchorEl);
+
+  // Load organizations based on mode
+  useEffect(() => {
+    const loadOrganizations = async () => {
+      if (isDemo) {
+        setOrganizations(mockOrganizations);
+      } else if (isReady) {
+        try {
+          const orgService = new OrganizationService();
+          const orgs = await orgService.getAllOrganizations();
+          setOrganizations(orgs);
+        } catch (error) {
+          console.error('Failed to load organizations:', error);
+          setOrganizations([]);
+        }
+      }
+    };
+
+    loadOrganizations();
+  }, [isDemo, isReady]);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,11 +64,8 @@ const OrganizationSelector = ({
     setAnchorEl(null);
   };
 
-  const handleOrgSelect = (orgId: string) => {
-    const org = mockOrganizations.find((o) => o.id === orgId);
-    if (org) {
-      setSelectedOrg(org);
-    }
+  const handleOrgSelect = (orgSlug: string) => {
+    switchOrganization(orgSlug);
     handleClose();
   };
 
@@ -77,8 +101,10 @@ const OrganizationSelector = ({
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          {getOrgIcon(selectedOrg.name)}
-          <Typography variant="body1">{selectedOrg.name}</Typography>
+          {currentOrganization && getOrgIcon(currentOrganization.name)}
+          <Typography variant="body1">
+            {currentOrganization?.name || "組織を選択"}
+          </Typography>
         </Box>
       </Button>
 
@@ -107,10 +133,10 @@ const OrganizationSelector = ({
           </Typography>
         </MenuItem>
 
-        {mockOrganizations.map((org) => (
+        {organizations.map((org) => (
           <MenuItem
             key={org.id}
-            onClick={() => handleOrgSelect(org.id)}
+            onClick={() => handleOrgSelect(org.slug)}
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -124,7 +150,7 @@ const OrganizationSelector = ({
               <Box>
                 <Typography
                   variant="body2"
-                  fontWeight={selectedOrg.id === org.id ? "medium" : "regular"}
+                  fontWeight={currentOrganization?.id === org.id ? "medium" : "regular"}
                 >
                   {org.name}
                 </Typography>
@@ -133,7 +159,7 @@ const OrganizationSelector = ({
                 </Typography>
               </Box>
             </Box>
-            {selectedOrg.id === org.id && (
+            {currentOrganization?.id === org.id && (
               <CheckIcon fontSize="small" color="primary" />
             )}
           </MenuItem>

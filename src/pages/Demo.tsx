@@ -34,7 +34,8 @@ const Demo: React.FC = () => {
     if (!isDemo) {
       setDemoMode(true);
     }
-    navigate("/dashboard");
+    // Navigate to dashboard with default organization slug for demo
+    navigate("/hirano-family/dashboard");
   };
 
   const features = [

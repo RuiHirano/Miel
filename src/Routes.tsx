@@ -16,9 +16,11 @@ const AppRoutes: React.FC = () => {
           <Route index element={<Home />} />
           <Route path="demo" element={<Demo />} />
         </Route>
-        <Route path="/" element={<UserLayout />}>
+        <Route path="/:organizationSlug" element={<UserLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
+        {/* Fallback route for dashboard without slug */}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
