@@ -139,7 +139,7 @@ const CTASection = () => {
               variant="contained"
               size="large"
               endIcon={<ArrowForwardIcon />}
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/demo")}
               sx={{
                 background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                 color: "white",

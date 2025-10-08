@@ -4,6 +4,7 @@ import HomeLayout from "./components/layout/HomeLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Demo from "./pages/Demo";
 import UserLayout from "./components/layout/UserLayout";
 
 const AppRoutes: React.FC = () => {
@@ -13,6 +14,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="/login" element={<Login />} />
           <Route index element={<Home />} />
+          <Route path="demo" element={<Demo />} />
         </Route>
         <Route path="/" element={<UserLayout />}>
           <Route path="dashboard" element={<Dashboard />} />

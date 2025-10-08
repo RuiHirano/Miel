@@ -146,7 +146,7 @@ const HeroSection = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => navigate("/demo")}
                   sx={{
                     bgcolor: theme.palette.primary.main,
                     color: "white",
@@ -170,7 +170,7 @@ const HeroSection = () => {
                 <Button
                   variant="outlined"
                   size="large"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => navigate("/demo")}
                   sx={{
                     borderColor: theme.palette.primary.main,
                     color: theme.palette.primary.main,

@@ -11,7 +11,7 @@ export class UserRepository {
   }
 
   private async initializeRepository(): Promise<void> {
-    const provider = await DatabaseProviderFactory.getProvider('indexeddb');
+    const provider = await DatabaseProviderFactory.getProvider();
     this.repository = provider.getRepository<User>('users');
   }
 

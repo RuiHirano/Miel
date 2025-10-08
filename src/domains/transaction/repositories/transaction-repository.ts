@@ -11,7 +11,7 @@ export class TransactionRepository {
   }
 
   private async initializeRepository(): Promise<void> {
-    const provider = await DatabaseProviderFactory.getProvider('indexeddb');
+    const provider = await DatabaseProviderFactory.getProvider();
     this.repository = provider.getRepository<Transaction>('transactions');
   }
 
@@ -84,7 +84,7 @@ export class TransactionCategoryRepository {
   }
 
   private async initializeRepository(): Promise<void> {
-    const provider = await DatabaseProviderFactory.getProvider('indexeddb');
+    const provider = await DatabaseProviderFactory.getProvider();
     this.repository = provider.getRepository<TransactionCategory>('transaction_categories');
   }
 
