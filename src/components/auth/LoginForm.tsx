@@ -77,7 +77,10 @@ const LoginForm = ({
               variant="contained"
               size="large"
               type="submit"
-              sx={{ py: 1.5 }}
+              sx={{ 
+                py: 1.5,
+                color: "white"
+              }}
             >
               ログイン
             </Button>
