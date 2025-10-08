@@ -224,58 +224,100 @@ const CashFlowSection = () => {
             enableLinkGradient={true}
             linkHoverOthersOpacity={0.5}
             linkTooltip={() => null}
-            label={(node) => {
-              return truncateLabel(
-                node.id as string,
-                viewBy === "description" ? 8 : 10
-              );
-            }}
-            labelPosition="inside"
-            labelOrientation="horizontal"
-            labelPadding={4}
-            labelTextColor="#504e4eff"
-            theme={{
-              labels: {
-                text: {
-                  fontWeight: "bold",
-                  fontSize: 9,
-                },
-              },
-            }}
+            enableLabels={false}
             legends={[]}
             layers={[
               "links",
               "nodes",
               ({ nodes }) => {
-                const balanceNode = nodes.find((n) => n.id === "収支");
-                if (!balanceNode) return null;
                 return (
-                  <g
-                    transform={`translate(${
-                      balanceNode.x + balanceNode.width / 2
-                    }, ${balanceNode.y - 20})`}
-                  >
-                    <text
-                      textAnchor="middle"
-                      style={{
-                        fontSize: 10,
-                        fontWeight: "bold",
-                        fill: "#504e4eff",
-                      }}
-                    >
-                      収支
-                    </text>
-                    <text
-                      textAnchor="middle"
-                      y={12} // 「収支」ラベルからの相対位置
-                      style={{
-                        fontSize: 10,
-                        fontWeight: "bold",
-                        fill: "#504e4eff",
-                      }}
-                    >
-                      {formatBalanceForSankey(totalIncome)}
-                    </text>
+                  <g>
+                    {nodes.map((node) => {
+                      const isBalanceNode = node.id === "収支";
+                      if (isBalanceNode) {
+                        return (
+                          <g
+                            transform={`translate(${node.x + node.width / 2}, ${
+                              node.y - 20
+                            })`}
+                          >
+                            <text
+                              textAnchor="middle"
+                              style={{
+                                fontSize: 10,
+                                fontWeight: "bold",
+                                fill: "#504e4eff",
+                              }}
+                            >
+                              収支
+                            </text>
+                            <text
+                              textAnchor="middle"
+                              y={12} // 「収支」ラベルからの相対位置
+                              style={{
+                                fontSize: 10,
+                                fontWeight: "bold",
+                                fill: "#504e4eff",
+                              }}
+                            >
+                              {formatBalanceForSankey(totalIncome)}
+                            </text>
+                          </g>
+                        );
+                      }
+
+                      const labelText = truncateLabel(
+                        node.id as string,
+                        viewBy === "description" ? 7 : 10
+                      );
+
+                      let amountToDisplay = node.value; // その他のノードはNivoが計算したvalue
+
+                      const amountText = isBalanceNode
+                        ? formatBalanceForSankey(amountToDisplay)
+                        : formatAmount(amountToDisplay);
+
+                      // ラベルと金額の表示位置を調整
+                      let labelYOffset = 0; // ノードの中心からのYオフセット
+
+                      let transformX = node.x + node.width / 2; // デフォルトはノードの中心
+                      let textAnchor: "start" | "middle" | "end" = "middle";
+
+                      // その他のノードはノードの内側に表示
+                      // ノードが左側にあるか右側にあるかを判断
+                      // node.x が小さいほど左側、大きいほど右側
+                      if (node.x < 100) {
+                        // 左側のノード (例: 収入カテゴリ、不足)
+                        transformX = node.x + node.width + 4; // ノードの右端から少し右
+                        textAnchor = "start";
+                      } else if (node.x > 200) {
+                        // 右側のノード (例: 支出カテゴリ、貯蓄)
+                        transformX = node.x - 4; // ノードの左端から少し左
+                        textAnchor = "end";
+                      }
+
+                      return (
+                        <g
+                          key={node.id}
+                          transform={`translate(${transformX}, ${
+                            node.y + node.height / 2
+                          })`}
+                        >
+                          {/* ラベル */}
+                          <text
+                            textAnchor={textAnchor}
+                            y={labelYOffset}
+                            style={{
+                              fontSize: 8,
+                              fontWeight: "bold",
+                              fill: "#504e4eff",
+                            }}
+                          >
+                            {labelText} {amountText}
+                          </text>
+                        </g>
+                      );
+                    })}
                   </g>
                 );
               },
