@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import type { PaletteMode } from '@mui/material';
+import type { PaletteMode } from "@mui/material";
+import type { ReactNode } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 // テーマコンテキストの型定義
 interface ThemeContextType {
@@ -10,7 +10,7 @@ interface ThemeContextType {
 
 // デフォルト値
 const defaultContext: ThemeContextType = {
-  mode: 'light',
+  mode: "light",
   toggleTheme: () => {},
 };
 
@@ -23,11 +23,13 @@ interface ThemeContextProviderProps {
 }
 
 // テーマプロバイダーコンポーネント
-export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ children }) => {
-  const [mode, setMode] = useState<PaletteMode>('light');
+export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
+  children,
+}) => {
+  const [mode, setMode] = useState<PaletteMode>("light");
 
   // ローカルストレージからテーマを読み込み
-  useEffect(() => {
+  /*useEffect(() => {
     const savedMode = localStorage.getItem('themeMode') as PaletteMode;
     if (savedMode && (savedMode === 'light' || savedMode === 'dark')) {
       setMode(savedMode);
@@ -36,13 +38,13 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setMode(prefersDark ? 'dark' : 'light');
     }
-  }, []);
+  }, []);*/
 
   // テーマを切り替える関数
   const toggleTheme = () => {
-    const newMode = mode === 'light' ? 'dark' : 'light';
+    const newMode = mode === "light" ? "dark" : "light";
     setMode(newMode);
-    localStorage.setItem('themeMode', newMode);
+    localStorage.setItem("themeMode", newMode);
   };
 
   const contextValue: ThemeContextType = {
@@ -61,7 +63,9 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
 export const useThemeContext = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useThemeContext must be used within a ThemeContextProvider');
+    throw new Error(
+      "useThemeContext must be used within a ThemeContextProvider"
+    );
   }
   return context;
 };
