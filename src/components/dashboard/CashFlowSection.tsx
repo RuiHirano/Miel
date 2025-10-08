@@ -2,9 +2,11 @@ import {
   Box,
   Paper,
   Stack,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
-  useTheme,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { ResponsiveSankey } from "@nivo/sankey";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
@@ -12,13 +14,28 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import SectionContainer from "../common/SectionContainer";
-import { createSankeyData } from "../../utils/sankeyData";
+import {
+  createSankeyData,
+  createSankeyDataByDescription,
+} from "../../utils/sankeyData";
 import { mockTransactions } from "../../domains/transaction/mock";
+import { useState } from "react";
 
 const CashFlowSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const sankeyData = createSankeyData(2024, 1);
+  const [viewBy, setViewBy] = useState("category"); // 'category' or 'description'
+
+  const sankeyData = viewBy === "category" ? createSankeyData(2024, 1) : createSankeyDataByDescription(2024, 1);
+
+  const handleViewByChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newViewBy: string
+  ) => {
+    if (newViewBy !== null) {
+      setViewBy(newViewBy);
+    }
+  };
 
   // Calculate totals for the current month
   const monthTransactions = mockTransactions.filter((txn) => {
@@ -133,6 +150,24 @@ const CashFlowSection = () => {
             </Typography>
           </Paper>
         </Stack>
+
+        {/* View By Toggle */}
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+          <ToggleButtonGroup
+            value={viewBy}
+            exclusive
+            onChange={handleViewByChange}
+            aria-label="表示切替"
+            size="small"
+          >
+            <ToggleButton value="category" aria-label="カテゴリ別" sx={{ width: '100px' }}>
+              カテゴリ別
+            </ToggleButton>
+            <ToggleButton value="description" aria-label="摘要別" sx={{ width: '100px' }}>
+              摘要別
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Box>
 
         {/* Sankey Diagram */}
         <Box
