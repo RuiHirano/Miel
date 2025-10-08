@@ -1,8 +1,6 @@
 import { DatabaseProviderFactory } from './database-provider';
 import { FeedbackService } from '../../domains/feedback/services/feedback-service';
-import { OrganizationService } from '../../domains/organization/services/organization-service';
 import { TransactionService } from '../../domains/transaction/services/transaction-service';
-import { UserService } from '../../domains/user/services/user-service';
 import { mockAIFeedbacks } from '../../domains/feedback/mock';
 
 export class DatabaseInitializer {

@@ -41,7 +41,7 @@ const SignUpForm = ({ onSignUpSuccess, onBackToLogin }: SignUpFormProps) => {
     }
 
     try {
-      const { isSignUpComplete, userId, nextStep } = await signUp({
+      const { isSignUpComplete } = await signUp({
         username: emailValue,
         password: password,
         options: {

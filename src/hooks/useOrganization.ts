@@ -8,7 +8,7 @@ import { useDemoMode } from '../contexts/DemoModeContext';
 export function useOrganization() {
   const { organizationSlug } = useParams<{ organizationSlug: string }>();
   const navigate = useNavigate();
-  const { isReady, isDemo } = useDatabase();
+  const { isReady } = useDatabase();
   const { isDemo: isDemoMode } = useDemoMode();
   const [currentOrganization, setCurrentOrganization] = useState<Organization | null>(null);
   const [loading, setLoading] = useState(true);

@@ -1,23 +1,25 @@
 import { Transaction, TransactionCategory } from "./types";
 
+const baseDate = new Date("2024-01-01T00:00:00");
+
 export const mockTransactionCategories: TransactionCategory[] = [
   // 支出カテゴリ
-  { id: "cat-1", name: "食費", icon: "🍽️", color: "#ff6b6b" },
-  { id: "cat-2", name: "交通費", icon: "🚗", color: "#4ecdc4" },
-  { id: "cat-3", name: "家賃", icon: "🏠", color: "#45b7d1" },
-  { id: "cat-4", name: "光熱費", icon: "⚡", color: "#96ceb4" },
-  { id: "cat-5", name: "通信費", icon: "📱", color: "#feca57" },
-  { id: "cat-6", name: "医療費", icon: "🏥", color: "#ff9ff3" },
-  { id: "cat-7", name: "娯楽費", icon: "🎮", color: "#54a0ff" },
-  { id: "cat-8", name: "日用品", icon: "🧽", color: "#5f27cd" },
-  { id: "cat-9", name: "衣服", icon: "👔", color: "#00d2d3" },
-  { id: "cat-10", name: "教育費", icon: "📚", color: "#ff6348" },
+  { id: "cat-1", name: "食費", icon: "🍽️", color: "#ff6b6b", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-2", name: "交通費", icon: "🚗", color: "#4ecdc4", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-3", name: "家賃", icon: "🏠", color: "#45b7d1", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-4", name: "光熱費", icon: "⚡", color: "#96ceb4", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-5", name: "通信費", icon: "📱", color: "#feca57", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-6", name: "医療費", icon: "🏥", color: "#ff9ff3", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-7", name: "娯楽費", icon: "🎮", color: "#54a0ff", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-8", name: "日用品", icon: "🧽", color: "#5f27cd", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-9", name: "衣服", icon: "👔", color: "#00d2d3", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-10", name: "教育費", icon: "📚", color: "#ff6348", createdAt: baseDate, updatedAt: baseDate },
   
   // 収入カテゴリ
-  { id: "cat-11", name: "給与", icon: "💰", color: "#2ed573" },
-  { id: "cat-12", name: "副業", icon: "💻", color: "#3742fa" },
-  { id: "cat-13", name: "投資", icon: "📈", color: "#ff4757" },
-  { id: "cat-14", name: "その他収入", icon: "💸", color: "#ffa502" },
+  { id: "cat-11", name: "給与", icon: "💰", color: "#2ed573", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-12", name: "副業", icon: "💻", color: "#3742fa", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-13", name: "投資", icon: "📈", color: "#ff4757", createdAt: baseDate, updatedAt: baseDate },
+  { id: "cat-14", name: "その他収入", icon: "💸", color: "#ffa502", createdAt: baseDate, updatedAt: baseDate },
 ];
 
 export const mockTransactions: Transaction[] = [
