@@ -30,8 +30,8 @@ export const DemoModeBanner: React.FC = () => {
   const confirmExitDemo = () => {
     setDemoMode(false);
     setShowExitDialog(false);
-    // Redirect to home page and reload to initialize real database
-    window.location.href = '/';
+    // Redirect to demo page and reload to initialize real database
+    window.location.href = '/demo';
   };
 
   return (
@@ -83,7 +83,7 @@ export const DemoModeBanner: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowExitDialog(false)}>キャンセル</Button>
-          <Button onClick={confirmExitDemo} variant="contained" autoFocus>
+          <Button onClick={confirmExitDemo} variant="contained" autoFocus sx={{ color: "white" }}>
             終了する
           </Button>
         </DialogActions>
