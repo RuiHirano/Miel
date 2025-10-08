@@ -10,7 +10,8 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { getUrl } from "aws-amplify/storage";
 
 interface Feature {
   icon: React.ReactNode;
@@ -24,6 +25,26 @@ const FeaturesSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [videoUrl, setVideoUrl] = useState<string>("");
+
+  // Get video URL from S3
+  useEffect(() => {
+    const getVideoUrl = async () => {
+      try {
+        const result = await getUrl({
+          path: "public/miel-demo-sample.mp4",
+          options: {
+            bucket: "mielFiles",
+          },
+        });
+        setVideoUrl(result.url.toString());
+      } catch (error) {
+        console.log(`Error loading video: ${error}`);
+      }
+    };
+
+    getVideoUrl();
+  }, []);
 
   // Intersection Observer for auto-play videos on scroll
   useEffect(() => {
@@ -56,6 +77,7 @@ const FeaturesSection = () => {
       observers.forEach((observer) => observer.disconnect());
     };
   }, []);
+  console.log(videoUrl);
 
   const features: Feature[] = [
     {
@@ -64,7 +86,7 @@ const FeaturesSection = () => {
       description:
         "サンキーダイアグラム、チャート、グラフで収支を直感的に表示。複雑な家計データも一目で理解できます。",
       gradient: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
-      demoVideo: "/src/assets/miel-demo-sample.mp4",
+      demoVideo: videoUrl,
     },
     {
       icon: <LightbulbIcon sx={{ fontSize: 32 }} />,
@@ -72,7 +94,7 @@ const FeaturesSection = () => {
       description:
         "直感的なUIで誰でも簡単に使えます。複雑な機能をシンプルに整理し、ストレスフリーな家計管理を実現。",
       gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-      demoVideo: "/src/assets/miel-demo-sample.mp4",
+      demoVideo: videoUrl,
     },
     {
       icon: <TrendingUpIcon sx={{ fontSize: 32 }} />,
@@ -80,7 +102,7 @@ const FeaturesSection = () => {
       description:
         "AIが過去のデータを分析し、支出パターンや節約のチャンスを自動で発見。賢い家計管理をサポートします。",
       gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      demoVideo: "/src/assets/miel-demo-sample.mp4",
+      demoVideo: videoUrl,
     },
   ];
 
