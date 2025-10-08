@@ -1,18 +1,8 @@
-import {
-  Box,
-  Typography,
-  Container,
-  Grid,
-  Stack,
-  useTheme,
-  alpha,
-} from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import SecurityIcon from "@mui/icons-material/Security";
 import MobileScreenShareIcon from "@mui/icons-material/MobileScreenShare";
-import PaletteIcon from "@mui/icons-material/Palette";
-import FlashOnIcon from "@mui/icons-material/FlashOn";
+import SecurityIcon from "@mui/icons-material/Security";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import { alpha, Box, Container, Grid, Stack, Typography } from "@mui/material";
 
 interface Feature {
   icon: React.ReactNode;
@@ -22,53 +12,43 @@ interface Feature {
 }
 
 const FeaturesSection = () => {
-  const theme = useTheme();
-
   const features: Feature[] = [
     {
       icon: <BarChartIcon sx={{ fontSize: 32 }} />,
       title: "美しいデータ可視化",
-      description: "サンキーダイアグラム、チャート、グラフで収支を直感的に表示。複雑な財務データも一目で理解できます。",
-      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      description:
+        "サンキーダイアグラム、チャート、グラフで収支を直感的に表示。複雑な財務データも一目で理解できます。",
+      gradient: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
     },
     {
       icon: <TrendingUpIcon sx={{ fontSize: 32 }} />,
       title: "インテリジェント分析",
-      description: "AI が過去のデータを分析し、支出パターンや節約のチャンスを自動で発見。賢い家計管理をサポートします。",
-      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      description:
+        "AI が過去のデータを分析し、支出パターンや節約のチャンスを自動で発見。賢い家計管理をサポートします。",
+      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
     },
     {
       icon: <MobileScreenShareIcon sx={{ fontSize: 32 }} />,
       title: "どこでもアクセス",
-      description: "レスポンシブデザインでスマートフォン、タブレット、デスクトップのすべてで最適な体験を提供します。",
-      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      description:
+        "レスポンシブデザインでスマートフォン、タブレット、デスクトップのすべてで最適な体験を提供します。",
+      gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
     },
     {
       icon: <SecurityIcon sx={{ fontSize: 32 }} />,
       title: "エンタープライズ級セキュリティ",
-      description: "銀行レベルの暗号化とセキュリティプロトコルで、あなたの大切な財務情報を完全に保護します。",
-      gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-    },
-    {
-      icon: <PaletteIcon sx={{ fontSize: 32 }} />,
-      title: "洗練されたデザイン",
-      description: "Apple や Google のデザイン原則に基づいた美しく使いやすいインターフェース。毎日使いたくなるアプリです。",
-      gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-    },
-    {
-      icon: <FlashOnIcon sx={{ fontSize: 32 }} />,
-      title: "稲妻のような高速性能",
-      description: "最新技術で構築された超高速アプリ。大量のデータも瞬時に処理し、ストレスフリーな操作感を実現。",
-      gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+      description:
+        "銀行レベルの暗号化とセキュリティプロトコルで、あなたの大切な財務情報を完全に保護します。",
+      gradient: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
     },
   ];
 
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         py: { xs: 12, md: 16 },
-        background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         position: "relative",
+        overflow: "hidden",
         "&::before": {
           content: '""',
           position: "absolute",
@@ -76,12 +56,98 @@ const FeaturesSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(circle at 30% 20%, ${alpha("#667eea", 0.03)} 0%, transparent 50%),
-                      radial-gradient(circle at 70% 80%, ${alpha("#764ba2", 0.03)} 0%, transparent 50%)`,
+          background: `radial-gradient(circle at 30% 20%, ${alpha(
+            "#667eea",
+            0.03
+          )} 0%, transparent 50%),
+                      radial-gradient(circle at 70% 80%, ${alpha(
+                        "#764ba2",
+                        0.03
+                      )} 0%, transparent 50%)`,
           pointerEvents: "none",
         },
       }}
     >
+      {/* Decorative Background Elements */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "10%",
+          left: "5%",
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+          bgcolor: "#10b981",
+          opacity: 0.4,
+          display: { xs: "none", md: "block" },
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          top: "15%",
+          right: "8%",
+          width: 80,
+          height: 80,
+          borderRadius: "50%",
+          bgcolor: "#f59e0b",
+          opacity: 0.5,
+          display: { xs: "none", md: "block" },
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "20%",
+          left: "10%",
+          width: 0,
+          height: 0,
+          borderLeft: "35px solid transparent",
+          borderRight: "35px solid transparent",
+          borderBottom: "60px solid #06b6d4",
+          opacity: 0.4,
+          display: { xs: "none", md: "block" },
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "10%",
+          right: "12%",
+          width: 70,
+          height: 70,
+          borderRadius: "50%",
+          bgcolor: "#8b5cf6",
+          opacity: 0.3,
+          display: { xs: "none", md: "block" },
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "2%",
+          width: 50,
+          height: 50,
+          background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+          opacity: 0.5,
+          transform: "rotate(45deg)",
+          display: { xs: "none", md: "block" },
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          top: "70%",
+          right: "5%",
+          width: 40,
+          height: 40,
+          background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+          opacity: 0.6,
+          transform: "rotate(45deg)",
+          display: { xs: "none", md: "block" },
+        }}
+      />
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Stack spacing={8} alignItems="center">
           <Stack spacing={3} alignItems="center" textAlign="center">
@@ -97,25 +163,24 @@ const FeaturesSection = () => {
                 letterSpacing: "-0.02em",
               }}
             >
-              なぜMielが選ばれるのか
+              Mielが選ばれる理由
             </Typography>
             <Typography
               variant="h5"
               color="text.secondary"
-              sx={{ 
+              sx={{
                 maxWidth: 680,
                 lineHeight: 1.6,
                 fontWeight: 400,
               }}
             >
-              革新的な技術と美しいデザインで、
-              家計管理の常識を変える6つの理由
+              シンプルかつ美しいデザインで、家計管理の常識を変える
             </Typography>
           </Stack>
 
           <Grid container spacing={4}>
             {features.map((feature, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
+              <Grid size={{ xs: 12, md: 6 }} key={index}>
                 <Box
                   sx={{
                     height: "100%",
@@ -162,28 +227,29 @@ const FeaturesSection = () => {
                         justifyContent: "center",
                         color: "white",
                         boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
-                        transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                        transition:
+                          "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                       }}
                     >
                       {feature.icon}
                     </Box>
-                    
+
                     <Typography
                       variant="h5"
                       fontWeight={600}
                       color="text.primary"
-                      sx={{ 
+                      sx={{
                         letterSpacing: "-0.01em",
                         lineHeight: 1.3,
                       }}
                     >
                       {feature.title}
                     </Typography>
-                    
+
                     <Typography
                       variant="body1"
                       color="text.secondary"
-                      sx={{ 
+                      sx={{
                         flexGrow: 1,
                         lineHeight: 1.7,
                         fontSize: "1rem",

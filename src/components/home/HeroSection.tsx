@@ -133,10 +133,14 @@ const HeroSection = () => {
                 <br />
                 Mielは、あらゆる家計管理を
                 <br />
-                シンプルで美しいUIで実現します。
+                シンプルかつ美しいUIで実現します。
               </Typography>
 
-              <Box sx={{ mt: 4 }}>
+              <Stack
+                direction={isMobile ? "column" : "row"}
+                spacing={3}
+                sx={{ mt: 4 }}
+              >
                 <Button
                   variant="contained"
                   size="large"
@@ -159,9 +163,32 @@ const HeroSection = () => {
                     transition: "all 0.3s ease",
                   }}
                 >
-                  無料ダウンロード
+                  今すぐ始める
                 </Button>
-              </Box>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  onClick={() => navigate("/dashboard")}
+                  sx={{
+                    borderColor: theme.palette.primary.main,
+                    color: theme.palette.primary.main,
+                    fontWeight: 500,
+                    px: 5,
+                    py: 2,
+                    borderRadius: "50px",
+                    fontSize: "1.1rem",
+                    textTransform: "none",
+                    "&:hover": {
+                      borderColor: theme.palette.primary.dark,
+                      bgcolor: `${theme.palette.primary.main}10`,
+                      transform: "translateY(-2px)",
+                    },
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  デモを試す
+                </Button>
+              </Stack>
             </Stack>
           </Box>
 

@@ -17,7 +17,7 @@ const AboutSection = () => {
     <Box
       sx={{
         position: "relative",
-        bgcolor: "#f0f9ff",
+        background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
         py: { xs: 8, md: 12 },
         overflow: "hidden",
       }}

@@ -22,7 +22,6 @@ const CTASection = () => {
     "完全無料で全機能利用可能",
     "クレジットカード登録不要",
     "30秒でアカウント作成完了",
-    "銀行レベルのセキュリティ",
   ];
 
   return (
@@ -40,8 +39,14 @@ const CTASection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(circle at 25% 25%, ${alpha("#667eea", 0.1)} 0%, transparent 50%),
-                      radial-gradient(circle at 75% 75%, ${alpha("#764ba2", 0.1)} 0%, transparent 50%)`,
+          background: `radial-gradient(circle at 25% 25%, ${alpha(
+            "#667eea",
+            0.1
+          )} 0%, transparent 50%),
+                      radial-gradient(circle at 75% 75%, ${alpha(
+                        "#764ba2",
+                        0.1
+                      )} 0%, transparent 50%)`,
           pointerEvents: "none",
         },
       }}
@@ -53,7 +58,7 @@ const CTASection = () => {
               variant="h2"
               component="h2"
               fontWeight={700}
-              sx={{ 
+              sx={{
                 maxWidth: 800,
                 letterSpacing: "-0.02em",
                 lineHeight: 1.2,
@@ -63,22 +68,22 @@ const CTASection = () => {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              あなたの財務管理を
+              あなたの家計管理を
               <br />
               次のレベルへ
             </Typography>
-            
+
             <Typography
               variant="h5"
-              sx={{ 
-                opacity: 0.9, 
+              sx={{
+                opacity: 0.9,
                 maxWidth: 600,
                 lineHeight: 1.6,
                 fontWeight: 400,
               }}
             >
               今すぐMielを始めて、お金の流れを美しく可視化し、
-              スマートな財務判断を手に入れましょう
+              スマートな家計判断を手に入れましょう
             </Typography>
           </Stack>
 
@@ -96,16 +101,16 @@ const CTASection = () => {
                 alignItems="center"
                 sx={{ flex: 1 }}
               >
-                <CheckCircleIcon 
-                  sx={{ 
-                    color: "#10b981", 
+                <CheckCircleIcon
+                  sx={{
+                    color: "#10b981",
                     fontSize: 20,
                     flexShrink: 0,
-                  }} 
+                  }}
                 />
                 <Typography
                   variant="body1"
-                  sx={{ 
+                  sx={{
                     opacity: 0.9,
                     textAlign: isMobile ? "left" : "center",
                     fontSize: "0.95rem",
@@ -116,7 +121,7 @@ const CTASection = () => {
               </Stack>
             ))}
           </Stack>
-          
+
           <Stack
             direction={isMobile ? "column" : "row"}
             spacing={3}
@@ -138,7 +143,8 @@ const CTASection = () => {
                 textTransform: "none",
                 boxShadow: "0 8px 32px rgba(102, 126, 234, 0.3)",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)",
+                  background:
+                    "linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)",
                   transform: "translateY(-3px)",
                   boxShadow: "0 12px 40px rgba(102, 126, 234, 0.4)",
                 },
@@ -147,7 +153,7 @@ const CTASection = () => {
             >
               今すぐ無料で始める
             </Button>
-            
+
             <Button
               variant="outlined"
               size="large"
@@ -173,62 +179,6 @@ const CTASection = () => {
               ログイン
             </Button>
           </Stack>
-          
-          <Box sx={{ mt: 12, width: "100%" }}>
-            <Divider sx={{ bgcolor: alpha("#ffffff", 0.1), mb: 4 }} />
-            <Stack 
-              direction={isMobile ? "column" : "row"} 
-              spacing={isMobile ? 2 : 4}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  opacity: 0.6,
-                  fontSize: "0.9rem",
-                }}
-              >
-                © 2024 Miel. All rights reserved.
-              </Typography>
-              <Stack 
-                direction="row" 
-                spacing={3}
-                sx={{ opacity: 0.6 }}
-              >
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    cursor: "pointer",
-                    "&:hover": { opacity: 1 },
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  プライバシー
-                </Typography>
-                <Typography 
-                  variant="body2"
-                  sx={{ 
-                    cursor: "pointer",
-                    "&:hover": { opacity: 1 },
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  利用規約
-                </Typography>
-                <Typography 
-                  variant="body2"
-                  sx={{ 
-                    cursor: "pointer",
-                    "&:hover": { opacity: 1 },
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  サポート
-                </Typography>
-              </Stack>
-            </Stack>
-          </Box>
         </Stack>
       </Container>
     </Box>
