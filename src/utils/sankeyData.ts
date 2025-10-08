@@ -3,14 +3,15 @@ import { lightTheme } from "../theme/theme";
 
 export interface SankeyNode {
   id: string;
-  nodeColor?: string;
+  color?: string;
 }
 
 export interface SankeyLink {
   source: string;
   target: string;
   value: number;
-  color?: string;
+  startColor: string;
+  endColor: string;
 }
 
 export interface SankeyData {
@@ -47,14 +48,14 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      nodeColor: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
+      color: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
     });
   });
 
   // 中央の「資金」ノード
   nodes.push({
     id: "資金",
-    nodeColor: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
+    color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
   });
 
   // 支出カテゴリのノード
@@ -65,7 +66,7 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      nodeColor: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
+      color: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
     });
   });
 
@@ -84,7 +85,8 @@ export const createSankeyData = (
         source: categoryName,
         target: "資金",
         value: totalAmount,
-        color: "#64b5f6", // 収入側のリンクは薄い青色
+        startColor: "#2AA693",
+        endColor: "#2AA693",
       });
     }
   });
@@ -101,7 +103,8 @@ export const createSankeyData = (
         source: "資金",
         target: categoryName,
         value: totalAmount,
-        color: "#ef5350", // 支出側のリンクは薄い赤色
+        startColor: "#ef5350",
+        endColor: "#ef5350",
       });
     }
   });
@@ -135,29 +138,37 @@ export const createSankeyDataByDescription = (
 
   // 収入摘要のノード
   const incomeDescriptions = [
-    ...new Set(incomeTransactions.map((txn) => txn.description)),
+    ...new Set(
+      incomeTransactions
+        .map((txn) => txn.description)
+        .filter(Boolean) as string[]
+    ),
   ];
   incomeDescriptions.forEach((description) => {
     nodes.push({
       id: description,
-      nodeColor: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
+      color: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
     });
   });
 
   // 中央の「資金」ノード
   nodes.push({
     id: "資金",
-    nodeColor: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
+    color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
   });
 
   // 支出摘要のノード
   const expenseDescriptions = [
-    ...new Set(expenseTransactions.map((txn) => txn.description)),
+    ...new Set(
+      expenseTransactions
+        .map((txn) => txn.description)
+        .filter(Boolean) as string[]
+    ),
   ];
   expenseDescriptions.forEach((description) => {
     nodes.push({
       id: description,
-      nodeColor: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
+      color: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
     });
   });
 
@@ -175,7 +186,8 @@ export const createSankeyDataByDescription = (
         source: description,
         target: "資金",
         value: totalAmount,
-        color: "#64b5f6", // 収入側のリンクは薄い青色
+        startColor: "#2AA693",
+        endColor: "#2AA693",
       });
     }
   });
@@ -191,11 +203,11 @@ export const createSankeyDataByDescription = (
         source: "資金",
         target: description,
         value: totalAmount,
-        color: "#ef5350", // 支出側のリンクは薄い赤色
+        startColor: "#ef5350",
+        endColor: "#ef5350",
       });
     }
   });
 
   return { nodes, links };
 };
-

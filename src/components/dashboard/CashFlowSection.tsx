@@ -26,10 +26,13 @@ const CashFlowSection = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [viewBy, setViewBy] = useState("category"); // 'category' or 'description'
 
-  const sankeyData = viewBy === "category" ? createSankeyData(2024, 1) : createSankeyDataByDescription(2024, 1);
+  const sankeyData =
+    viewBy === "category"
+      ? createSankeyData(2024, 1)
+      : createSankeyDataByDescription(2024, 1);
 
   const handleViewByChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _event: React.MouseEvent<HTMLElement>,
     newViewBy: string
   ) => {
     if (newViewBy !== null) {
@@ -167,10 +170,18 @@ const CashFlowSection = () => {
             aria-label="表示切替"
             size="small"
           >
-            <ToggleButton value="category" aria-label="カテゴリ別" sx={{ width: '100px' }}>
+            <ToggleButton
+              value="category"
+              aria-label="カテゴリ別"
+              sx={{ width: "100px" }}
+            >
               カテゴリ別
             </ToggleButton>
-            <ToggleButton value="description" aria-label="摘要別" sx={{ width: '100px' }}>
+            <ToggleButton
+              value="description"
+              aria-label="摘要別"
+              sx={{ width: "100px" }}
+            >
               摘要別
             </ToggleButton>
           </ToggleButtonGroup>
@@ -189,10 +200,10 @@ const CashFlowSection = () => {
               top: 20,
               right: isMobile ? 80 : 150, // 右マージンを増やす
               bottom: 20,
-              left: isMobile ? 60 : 80,   // 左マージンも少し増やす
+              left: isMobile ? 60 : 80, // 左マージンも少し増やす
             }}
             align="justify"
-            colors={(node) => node.nodeColor || "#757575"}
+            colors={(d: any) => (d.data ? d.data.color : d.color) || "#757575"}
             nodeOpacity={1}
             nodeHoverOthersOpacity={0.35}
             nodeThickness={18}
@@ -205,10 +216,15 @@ const CashFlowSection = () => {
             nodeBorderRadius={2}
             linkOpacity={0.5}
             linkContract={3}
-            enableLinkGradient={false}
+            enableLinkGradient={true}
             linkHoverOthersOpacity={0.5}
             linkTooltip={() => null}
-            label={(node) => truncateLabel(node.id as string, viewBy === 'description' ? 8 : 10)} // 摘要の場合は短めに
+            label={(node) =>
+              truncateLabel(
+                node.id as string,
+                viewBy === "description" ? 8 : 10
+              )
+            } // 摘要の場合は短めに
             labelPosition="outside"
             labelOrientation="horizontal"
             labelPadding={16}
