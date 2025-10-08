@@ -9,7 +9,7 @@ declare module "@mui/material/styles" {
   }
 
   interface Palette {
-    chart?: {
+    chart: {
       income: string;
       expense: string;
       neutral: string;
@@ -17,7 +17,7 @@ declare module "@mui/material/styles" {
   }
 
   interface PaletteOptions {
-    chart?: {
+    chart: {
       income: string;
       expense: string;
       neutral: string;
@@ -61,8 +61,8 @@ const customColors = {
 
 // チャート用カラーパレット
 const chartColors = {
-  income: "#16c2a8ff", // 収入（緑）
-  expense: "#eb4b4bff", // 支出（赤）
+  income: "#2AA693", // 収入（緑）
+  expense: "#ef5350", // 支出（赤）
   neutral: "#4B5563", // 中立（グレー）
 };
 

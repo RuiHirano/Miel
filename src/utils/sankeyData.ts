@@ -48,14 +48,14 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      color: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
+      color: lightTheme.palette.chart.income, // 収入は緑色
     });
   });
 
   // 中央の「収支」ノード
   nodes.push({
     id: "収支",
-    color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
+    color: lightTheme.palette.chart.neutral, // 中立色
   });
 
   // 支出カテゴリのノード
@@ -66,7 +66,7 @@ export const createSankeyData = (
     const categoryName = getCategoryName(categoryId);
     nodes.push({
       id: categoryName,
-      color: lightTheme.palette.chart?.expense || "#DC2626", // 支出は赤色
+      color: lightTheme.palette.chart.expense, // 支出は赤色
     });
   });
 
@@ -123,29 +123,29 @@ export const createSankeyData = (
     // 「貯蓄」ノードの追加
     nodes.push({
       id: "貯蓄",
-      color: lightTheme.palette.chart?.savings || "#10B981", // 貯蓄用の色
+      color: "#2AA693", // 貯蓄用の色
     });
     // 収支から貯蓄へのリンク
     links.push({
       source: "収支",
       target: "貯蓄",
       value: balanceAmount,
-      startColor: "#10B981",
-      endColor: "#10B981",
+      startColor: "#2AA693",
+      endColor: "#2AA693",
     });
   } else if (balanceAmount < 0) {
     // 「不足」ノードの追加
     nodes.push({
       id: "不足",
-      color: lightTheme.palette.chart?.deficit || "#F43F5E", // 不足用の色
+      color: "#ef5350", // 不足用の色
     });
     // 不足から収支へのリンク
     links.push({
       source: "不足",
       target: "収支",
       value: -balanceAmount, // 絶対値
-      startColor: "#F43F5E",
-      endColor: "#F43F5E",
+      startColor: "#ef5350",
+      endColor: "#ef5350",
     });
   }
 
@@ -187,14 +187,14 @@ export const createSankeyDataByDescription = (
   incomeDescriptions.forEach((description) => {
     nodes.push({
       id: description,
-      color: lightTheme.palette.chart?.income || "#2AA693", // 収入は緑色
+      color: lightTheme.palette.chart.income, // 収入は緑色
     });
   });
 
   // 中央の「収支」ノード
   nodes.push({
     id: "収支",
-    color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
+    color: lightTheme.palette.chart.neutral, // 中立色
   });
 
   // 支出摘要のノード
@@ -208,7 +208,7 @@ export const createSankeyDataByDescription = (
   expenseDescriptions.forEach((description) => {
     nodes.push({
       id: description,
-      color: lightTheme.palette.chart?.expense || "#ef5350", // 支出は赤色
+      color: lightTheme.palette.chart.expense, // 支出は赤色
     });
   });
 
@@ -263,29 +263,29 @@ export const createSankeyDataByDescription = (
     // 「貯蓄」ノードの追加
     nodes.push({
       id: "貯蓄",
-      color: lightTheme.palette.chart?.savings || "#10B981", // 貯蓄用の色
+      color: "#2AA693", // 貯蓄用の色
     });
     // 収支から貯蓄へのリンク
     links.push({
       source: "収支",
       target: "貯蓄",
       value: balanceAmount,
-      startColor: "#10B981",
-      endColor: "#10B981",
+      startColor: "#2AA693",
+      endColor: "#2AA693",
     });
   } else if (balanceAmount < 0) {
     // 「不足」ノードの追加
     nodes.push({
       id: "不足",
-      color: lightTheme.palette.chart?.deficit || "#F43F5E", // 不足用の色
+      color: "#ef5350", // 不足用の色
     });
     // 不足から収支へのリンク
     links.push({
       source: "不足",
       target: "収支",
       value: -balanceAmount, // 絶対値
-      startColor: "#F43F5E",
-      endColor: "#F43F5E",
+      startColor: "#ef5350",
+      endColor: "#ef5350",
     });
   }
 
