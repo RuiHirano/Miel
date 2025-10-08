@@ -60,6 +60,13 @@ const CashFlowSection = () => {
     }).format(amount);
   };
 
+  const truncateLabel = (label: string, maxLength = 10) => {
+    if (label.length > maxLength) {
+      return `${label.slice(0, maxLength)}...`;
+    }
+    return label;
+  };
+
   return (
     <SectionContainer
       title="収支の流れ"
@@ -180,16 +187,16 @@ const CashFlowSection = () => {
             data={sankeyData}
             margin={{
               top: 20,
-              right: isMobile ? 40 : 80,
+              right: isMobile ? 80 : 150, // 右マージンを増やす
               bottom: 20,
-              left: isMobile ? 30 : 50,
+              left: isMobile ? 60 : 80,   // 左マージンも少し増やす
             }}
             align="justify"
             colors={(node) => node.nodeColor || "#757575"}
             nodeOpacity={1}
             nodeHoverOthersOpacity={0.35}
             nodeThickness={18}
-            nodeSpacing={24}
+            nodeSpacing={12} // spacingを少し詰める
             nodeBorderWidth={0}
             nodeBorderColor={{
               from: "color",
@@ -201,9 +208,10 @@ const CashFlowSection = () => {
             enableLinkGradient={false}
             linkHoverOthersOpacity={0.5}
             linkTooltip={() => null}
+            label={(node) => truncateLabel(node.id as string, viewBy === 'description' ? 8 : 10)} // 摘要の場合は短めに
             labelPosition="outside"
             labelOrientation="horizontal"
-            labelPadding={isMobile ? 8 : 16}
+            labelPadding={16}
             labelTextColor={{
               from: "color",
               modifiers: [["darker", 1]],
