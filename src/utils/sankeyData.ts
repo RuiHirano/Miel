@@ -52,9 +52,9 @@ export const createSankeyData = (
     });
   });
 
-  // 中央の「資金」ノード
+  // 中央の「収支」ノード
   nodes.push({
-    id: "資金",
+    id: "収支",
     color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
   });
 
@@ -73,7 +73,7 @@ export const createSankeyData = (
   // リンクの作成
   const links: SankeyLink[] = [];
 
-  // 収入カテゴリから資金へのリンク
+  // 収入カテゴリから収支へのリンク
   incomeCategories.forEach((categoryId) => {
     const categoryName = getCategoryName(categoryId);
     const totalAmount = incomeTransactions
@@ -83,7 +83,7 @@ export const createSankeyData = (
     if (totalAmount > 0) {
       links.push({
         source: categoryName,
-        target: "資金",
+        target: "収支",
         value: totalAmount,
         startColor: "#2AA693",
         endColor: "#2AA693",
@@ -91,7 +91,7 @@ export const createSankeyData = (
     }
   });
 
-  // 資金から支出カテゴリへのリンク
+  // 収支から支出カテゴリへのリンク
   expenseCategories.forEach((categoryId) => {
     const categoryName = getCategoryName(categoryId);
     const totalAmount = expenseTransactions
@@ -100,7 +100,7 @@ export const createSankeyData = (
 
     if (totalAmount > 0) {
       links.push({
-        source: "資金",
+        source: "収支",
         target: categoryName,
         value: totalAmount,
         startColor: "#ef5350",
@@ -151,9 +151,9 @@ export const createSankeyDataByDescription = (
     });
   });
 
-  // 中央の「資金」ノード
+  // 中央の「収支」ノード
   nodes.push({
-    id: "資金",
+    id: "収支",
     color: lightTheme.palette.chart?.neutral || "#4B5563", // 中立色
   });
 
@@ -175,7 +175,7 @@ export const createSankeyDataByDescription = (
   // リンクの作成
   const links: SankeyLink[] = [];
 
-  // 収入摘要から資金へのリンク
+  // 収入摘要から収支へのリンク
   incomeDescriptions.forEach((description) => {
     const totalAmount = incomeTransactions
       .filter((txn) => txn.description === description)
@@ -184,7 +184,7 @@ export const createSankeyDataByDescription = (
     if (totalAmount > 0) {
       links.push({
         source: description,
-        target: "資金",
+        target: "収支",
         value: totalAmount,
         startColor: "#2AA693",
         endColor: "#2AA693",
@@ -192,7 +192,7 @@ export const createSankeyDataByDescription = (
     }
   });
 
-  // 資金から支出摘要へのリンク
+  // 収支から支出摘要へのリンク
   expenseDescriptions.forEach((description) => {
     const totalAmount = expenseTransactions
       .filter((txn) => txn.description === description)
@@ -200,7 +200,7 @@ export const createSankeyDataByDescription = (
 
     if (totalAmount > 0) {
       links.push({
-        source: "資金",
+        source: "収支",
         target: description,
         value: totalAmount,
         startColor: "#ef5350",

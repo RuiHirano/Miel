@@ -219,25 +219,52 @@ const CashFlowSection = () => {
             enableLinkGradient={true}
             linkHoverOthersOpacity={0.5}
             linkTooltip={() => null}
-            label={(node) =>
-              truncateLabel(
+            label={(node) => {
+              return truncateLabel(
                 node.id as string,
                 viewBy === "description" ? 8 : 10
-              )
-            } // 摘要の場合は短めに
+              );
+            }}
             labelPosition="inside"
             labelOrientation="horizontal"
-            labelPadding={8}
-            labelTextColor="#3c3a3aff"
+            labelPadding={4}
+            labelTextColor="#504e4eff"
             theme={{
               labels: {
                 text: {
                   fontWeight: "bold",
-                  fontSize: 10,
+                  fontSize: 9,
                 },
               },
             }}
             legends={[]}
+            layers={[
+              "links",
+              "nodes",
+              ({ nodes }) => {
+                const balanceNode = nodes.find((n) => n.id === "収支");
+                if (!balanceNode) return null;
+                return (
+                  <g
+                    transform={`translate(${
+                      balanceNode.x + balanceNode.width / 2
+                    }, ${balanceNode.y - 10})`}
+                  >
+                    <text
+                      textAnchor="middle"
+                      style={{
+                        fontSize: 10,
+                        fontWeight: "bold",
+                        fill: "#504e4eff",
+                      }}
+                    >
+                      収支
+                    </text>
+                  </g>
+                );
+              },
+              "labels",
+            ]}
             animate={false}
             motionConfig="wobbly"
           />
