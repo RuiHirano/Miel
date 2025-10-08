@@ -65,6 +65,7 @@ const CTASection = () => {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.5rem" },
               }}
             >
               あなたの家計管理を
@@ -79,6 +80,7 @@ const CTASection = () => {
                 maxWidth: 600,
                 lineHeight: 1.6,
                 fontWeight: 400,
+                fontSize: { xs: "1rem", md: "1.25rem" },
               }}
             >
               今すぐMielを始めて、お金の流れを美しく可視化し、
@@ -112,7 +114,7 @@ const CTASection = () => {
                   sx={{
                     opacity: 0.9,
                     textAlign: isMobile ? "left" : "center",
-                    fontSize: "0.95rem",
+                    fontSize: { xs: "0.875rem", md: "0.95rem" },
                   }}
                 >
                   {benefit}
@@ -138,7 +140,7 @@ const CTASection = () => {
                 px: 6,
                 py: 2.5,
                 borderRadius: 2,
-                fontSize: "1.2rem",
+                fontSize: { xs: "1rem", md: "1.2rem" },
                 textTransform: "none",
                 boxShadow: "0 8px 32px rgba(102, 126, 234, 0.3)",
                 "&:hover": {
@@ -164,7 +166,7 @@ const CTASection = () => {
                 px: 6,
                 py: 2.5,
                 borderRadius: 2,
-                fontSize: "1.2rem",
+                fontSize: { xs: "1rem", md: "1.2rem" },
                 textTransform: "none",
                 backdropFilter: "blur(10px)",
                 "&:hover": {

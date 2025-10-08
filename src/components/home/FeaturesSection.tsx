@@ -202,6 +202,7 @@ const FeaturesSection = () => {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 letterSpacing: "-0.02em",
+                fontSize: { xs: "1.8rem", sm: "2.2rem", md: "2.5rem" },
               }}
             >
               Mielが選ばれる理由
@@ -213,6 +214,7 @@ const FeaturesSection = () => {
                 maxWidth: 680,
                 lineHeight: 1.6,
                 fontWeight: 400,
+                fontSize: { xs: "1rem", md: "1.25rem" },
               }}
             >
               シンプルかつ美しいデザインで、家計管理の常識を変える
@@ -286,6 +288,7 @@ const FeaturesSection = () => {
                       sx={{
                         letterSpacing: "-0.01em",
                         lineHeight: 1.3,
+                        fontSize: { xs: "1.5rem", md: "2rem" },
                       }}
                     >
                       {feature.title}
@@ -296,7 +299,7 @@ const FeaturesSection = () => {
                       color="text.secondary"
                       sx={{
                         lineHeight: 1.8,
-                        fontSize: "1.1rem",
+                        fontSize: { xs: "0.95rem", md: "1.1rem" },
                       }}
                     >
                       {feature.description}

@@ -97,6 +97,7 @@ const HeroSection = () => {
                   color: "#64748b",
                   fontWeight: 500,
                   textAlign: isMobile ? "center" : "left",
+                  fontSize: { xs: "0.875rem", md: "1rem" },
                 }}
               >
                 家計管理の新しいスタンダード
@@ -111,7 +112,7 @@ const HeroSection = () => {
                   color: "#1e293b",
                   letterSpacing: "-0.02em",
                   lineHeight: 1.2,
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
+                  fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
                 }}
               >
                 正しい家計管理が
@@ -127,6 +128,7 @@ const HeroSection = () => {
                   lineHeight: 1.8,
                   fontWeight: 400,
                   maxWidth: 480,
+                  fontSize: { xs: "1rem", md: "1.25rem" },
                 }}
               >
                 収支管理、支出分析、資産運用まで。
@@ -152,7 +154,7 @@ const HeroSection = () => {
                     px: 5,
                     py: 2,
                     borderRadius: "50px",
-                    fontSize: "1.1rem",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
                     textTransform: "none",
                     boxShadow: `0 4px 20px ${theme.palette.primary.main}40`,
                     "&:hover": {
@@ -176,7 +178,7 @@ const HeroSection = () => {
                     px: 5,
                     py: 2,
                     borderRadius: "50px",
-                    fontSize: "1.1rem",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
                     textTransform: "none",
                     "&:hover": {
                       borderColor: theme.palette.primary.dark,

@@ -104,6 +104,7 @@ const AboutSection = () => {
                     color: "#06b6d4",
                     fontWeight: 600,
                     textAlign: isMobile ? "center" : "left",
+                    fontSize: { xs: "0.875rem", md: "1rem" },
                   }}
                 >
                   What's Miel?
@@ -119,7 +120,7 @@ const AboutSection = () => {
                   color: "#1e293b",
                   letterSpacing: "-0.02em",
                   lineHeight: 1.2,
-                  fontSize: { xs: "2.2rem", md: "3rem" },
+                  fontSize: { xs: "1.8rem", sm: "2.2rem", md: "3rem" },
                 }}
               >
                 家計データを軸に
@@ -135,6 +136,7 @@ const AboutSection = () => {
                   lineHeight: 1.8,
                   fontWeight: 400,
                   maxWidth: 500,
+                  fontSize: { xs: "1rem", md: "1.25rem" },
                 }}
               >
                 Mielは家計データの活用支援を通して、
