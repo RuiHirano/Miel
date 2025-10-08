@@ -1,9 +1,8 @@
 import { ThemeProvider } from "@mui/material";
+import { DemoModeProvider } from "./contexts/DemoModeContext";
 import AppRoutes from "./Routes";
 import { getTheme } from "./theme/theme";
 import { useThemeContext } from "./theme/ThemeContext";
-import { DemoModeProvider } from "./contexts/DemoModeContext";
-import { DatabaseProvider } from "./components/common/DatabaseProvider";
 
 function App() {
   const { mode } = useThemeContext();
@@ -11,9 +10,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <DemoModeProvider>
-        <DatabaseProvider>
-          <AppRoutes />
-        </DatabaseProvider>
+        <AppRoutes />
       </DemoModeProvider>
     </ThemeProvider>
   );

@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDemoMode } from "../../contexts/DemoModeContext";
+import { useNavigate } from "react-router-dom";
 
 export const DemoModeBanner: React.FC = () => {
+  const navigate = useNavigate();
   const { isDemo, setDemoMode } = useDemoMode();
   const [showExitDialog, setShowExitDialog] = useState(false);
 
@@ -31,7 +33,7 @@ export const DemoModeBanner: React.FC = () => {
     setDemoMode(false);
     setShowExitDialog(false);
     // Redirect to demo page and reload to initialize real database
-    window.location.href = '/demo';
+    navigate("/demo");
   };
 
   return (
@@ -83,7 +85,12 @@ export const DemoModeBanner: React.FC = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowExitDialog(false)}>キャンセル</Button>
-          <Button onClick={confirmExitDemo} variant="contained" autoFocus sx={{ color: "white" }}>
+          <Button
+            onClick={confirmExitDemo}
+            variant="contained"
+            autoFocus
+            sx={{ color: "white" }}
+          >
             終了する
           </Button>
         </DialogActions>
