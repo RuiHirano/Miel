@@ -115,9 +115,11 @@ const HeroSection = () => {
                   fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
                 }}
               >
-                正しい家計管理が
+                家計管理は
                 <br />
-                豊かな暮らしを加速する
+                もっとシンプルに
+                <br />
+                Mielで始める新しい暮らし
               </Typography>
 
               <Typography

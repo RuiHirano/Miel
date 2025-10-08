@@ -240,7 +240,7 @@ const AboutSection = () => {
                   textAlign="center"
                   sx={{ fontSize: { xs: "0.75rem", md: "0.875rem" } }}
                 >
-                  資産
+                  家計
                   <br />
                   分析
                 </Typography>

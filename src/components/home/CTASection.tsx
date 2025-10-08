@@ -18,7 +18,7 @@ const CTASection = () => {
   const navigate = useNavigate();
 
   const benefits = [
-    "完全無料で全機能利用可能",
+    "家計の課題がひと目でわかる",
     "クレジットカード登録不要",
     "30秒でアカウント作成完了",
   ];
@@ -84,7 +84,7 @@ const CTASection = () => {
               }}
             >
               今すぐMielを始めて、お金の流れを美しく可視化し、
-              スマートな家計判断を手に入れましょう
+              理想の家計を手に入れましょう
             </Typography>
           </Stack>
 
@@ -92,10 +92,10 @@ const CTASection = () => {
           <Stack
             direction={isMobile ? "column" : "row"}
             spacing={isMobile ? 2 : 4}
-            sx={{ 
-              width: "100%", 
+            sx={{
+              width: "100%",
               maxWidth: 800,
-              alignItems: isMobile ? "center" : "stretch"
+              alignItems: isMobile ? "center" : "stretch",
             }}
           >
             {benefits.map((benefit, index) => (
@@ -104,9 +104,9 @@ const CTASection = () => {
                 direction="row"
                 spacing={1.5}
                 alignItems="center"
-                sx={{ 
+                sx={{
                   flex: 1,
-                  justifyContent: isMobile ? "center" : "flex-start"
+                  justifyContent: isMobile ? "center" : "flex-start",
                 }}
               >
                 <CheckCircleIcon
