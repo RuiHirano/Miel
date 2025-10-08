@@ -2,9 +2,13 @@ import {
   Box,
   Container,
 } from "@mui/material";
+import { useState } from "react";
 import LoginForm from "../components/auth/LoginForm";
+import SignUpForm from "../components/auth/SignUpForm";
 
 const Login = () => {
+  const [mode, setMode] = useState<"login" | "signup">("login");
+
   const handleEmailLogin = (email: string, password: string) => {
     console.log("Email login:", { email, password });
   };
@@ -18,7 +22,15 @@ const Login = () => {
   };
 
   const handleSignUp = () => {
-    console.log("Sign up clicked");
+    setMode("signup");
+  };
+
+  const handleSignUpSuccess = () => {
+    setMode("login");
+  };
+
+  const handleBackToLogin = () => {
+    setMode("login");
   };
 
   return (
@@ -33,12 +45,19 @@ const Login = () => {
       }}
     >
       <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "center" }}>
-        <LoginForm
-          onEmailLogin={handleEmailLogin}
-          onGoogleLogin={handleGoogleLogin}
-          onForgotPassword={handleForgotPassword}
-          onSignUp={handleSignUp}
-        />
+        {mode === "login" ? (
+          <LoginForm
+            onEmailLogin={handleEmailLogin}
+            onGoogleLogin={handleGoogleLogin}
+            onForgotPassword={handleForgotPassword}
+            onSignUp={handleSignUp}
+          />
+        ) : (
+          <SignUpForm
+            onSignUpSuccess={handleSignUpSuccess}
+            onBackToLogin={handleBackToLogin}
+          />
+        )}
       </Container>
     </Box>
   );

@@ -1,6 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { getCurrentUser } from "aws-amplify/auth";
 import AllTransactionsSection from "../components/dashboard/AllTransactionsSection";
 import CashFlowSection from "../components/dashboard/CashFlowSection";
 import MonthlyBalanceSection from "../components/dashboard/MonthlyBalanceSection";
@@ -10,6 +11,20 @@ import MonthSelector from "../components/dashboard/MonthSelector";
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await getCurrentUser();
+      } catch (error) {
+        // User is not authenticated, redirect to login
+        window.location.href = "/login";
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   // Initialize date from URL params on mount
   useEffect(() => {

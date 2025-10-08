@@ -8,8 +8,11 @@ import {
   Stack,
   Divider,
   Link,
+  Alert,
 } from "@mui/material";
 import { Google as GoogleIcon } from "@mui/icons-material";
+import { signIn } from "aws-amplify/auth";
+import { useState } from "react";
 
 interface LoginFormProps {
   onEmailLogin?: (email: string, password: string) => void;
@@ -24,12 +27,53 @@ const LoginForm = ({
   onForgotPassword,
   onSignUp,
 }: LoginFormProps) => {
-  const handleEmailLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+
+  const handleEmailLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
+    setError("");
+
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    onEmailLogin?.(email, password);
+
+    try {
+      const { isSignedIn, nextStep } = await signIn({
+        username: email,
+        password: password,
+      });
+
+      if (isSignedIn) {
+        // Redirect to dashboard or call success callback
+        onEmailLogin?.(email, password);
+        window.location.href = "/dashboard";
+      } else {
+        // Handle next step (e.g., email confirmation, MFA)
+        console.log("Next step:", nextStep);
+        setError("サインインに追加のステップが必要です。");
+      }
+    } catch (error: any) {
+      console.error("Sign in error:", error);
+      
+      // Handle different error types
+      switch (error.name) {
+        case "UserNotConfirmedException":
+          setError("アカウントの確認が必要です。メールをご確認ください。");
+          break;
+        case "NotAuthorizedException":
+          setError("メールアドレスまたはパスワードが間違っています。");
+          break;
+        case "UserNotFoundException":
+          setError("このメールアドレスのアカウントが見つかりません。");
+          break;
+        default:
+          setError("ログインに失敗しました。もう一度お試しください。");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,6 +94,13 @@ const LoginForm = ({
           </Typography>
         </Box>
 
+        {/* エラーメッセージ */}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
+
         {/* ログインフォーム */}
         <Box component="form" onSubmit={handleEmailLogin}>
           <Stack spacing={3}>
@@ -61,6 +112,7 @@ const LoginForm = ({
               variant="outlined"
               placeholder="example@email.com"
               required
+              disabled={loading}
             />
             <TextField
               fullWidth
@@ -70,6 +122,7 @@ const LoginForm = ({
               variant="outlined"
               placeholder="パスワードを入力"
               required
+              disabled={loading}
             />
 
             <Button
@@ -77,12 +130,13 @@ const LoginForm = ({
               variant="contained"
               size="large"
               type="submit"
+              disabled={loading}
               sx={{ 
                 py: 1.5,
                 color: "white"
               }}
             >
-              ログイン
+              {loading ? "ログイン中..." : "ログイン"}
             </Button>
 
             <Box sx={{ textAlign: "center" }}>

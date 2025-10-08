@@ -1,9 +1,19 @@
-import { AppBar, Toolbar, Typography, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "aws-amplify/auth";
 import OrganizationSelector from "../common/OrganizationSelector";
 
 const UserHeader = () => {
   const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }
+  };
 
   return (
     <AppBar
@@ -35,6 +45,19 @@ const UserHeader = () => {
 
         {/* Organization Selector - Right side */}
         <OrganizationSelector variant="dark" />
+        
+        <Button
+          color="inherit"
+          onClick={handleSignOut}
+          sx={{
+            fontWeight: 500,
+            textTransform: "none",
+            fontSize: "1rem",
+            ml: 2,
+          }}
+        >
+          ログアウト
+        </Button>
       </Toolbar>
     </AppBar>
   );
