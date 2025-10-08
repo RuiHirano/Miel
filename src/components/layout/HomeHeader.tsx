@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const HomeHeader = () => {
@@ -14,17 +14,23 @@ const HomeHeader = () => {
       }}
     >
       <Toolbar>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            flexGrow: 1,
-            color: "inherit",
-            fontWeight: "bold",
-          }}
-        >
-          Miel
-        </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="span"
+            onClick={() => navigate("/")}
+            sx={{
+              color: "inherit",
+              fontWeight: "bold",
+              cursor: "pointer",
+              "&:hover": {
+                opacity: 0.9,
+              },
+            }}
+          >
+            Miel
+          </Typography>
+        </Box>
         <Button
           color="inherit"
           onClick={() => navigate("/login")}
