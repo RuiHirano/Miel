@@ -1,17 +1,16 @@
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
+  alpha,
   Box,
-  Typography,
   Button,
   Container,
   Stack,
-  useTheme,
+  Typography,
   useMediaQuery,
-  alpha,
-  Divider,
+  useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const CTASection = () => {
   const theme = useTheme();
