@@ -48,36 +48,42 @@ const FeaturesSection = () => {
 
   // Intersection Observer for auto-play videos on scroll
   useEffect(() => {
+    // Only set up observers if videoUrl is loaded
+    if (!videoUrl) return;
+
     const observers: IntersectionObserver[] = [];
 
-    videoRefs.current.forEach((video, index) => {
-      if (!video) return;
+    // Small delay to ensure video elements are rendered
+    const timer = setTimeout(() => {
+      videoRefs.current.forEach((video, index) => {
+        if (!video) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              video.play().catch(() => {
-                // Handle autoplay policy restrictions
-                console.log("Autoplay prevented for video", index);
-              });
-            } else {
-              video.pause();
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                video.play().catch(() => {
+                  // Handle autoplay policy restrictions
+                  console.log("Autoplay prevented for video", index);
+                });
+              } else {
+                video.pause();
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
 
-      observer.observe(video);
-      observers.push(observer);
-    });
+        observer.observe(video);
+        observers.push(observer);
+      });
+    }, 100);
 
     return () => {
+      clearTimeout(timer);
       observers.forEach((observer) => observer.disconnect());
     };
-  }, []);
-  console.log(videoUrl);
+  }, [videoUrl]);
 
   const features: Feature[] = [
     {
