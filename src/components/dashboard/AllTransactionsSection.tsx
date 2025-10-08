@@ -26,7 +26,9 @@ interface AllTransactionsSectionProps {
   selectedDate: Date | null;
 }
 
-const AllTransactionsSection = ({ selectedDate }: AllTransactionsSectionProps) => {
+const AllTransactionsSection = ({
+  selectedDate,
+}: AllTransactionsSectionProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [page, setPage] = useState(1);
@@ -65,10 +67,10 @@ const AllTransactionsSection = ({ selectedDate }: AllTransactionsSectionProps) =
 
   const getTitle = () => {
     if (!selectedDate) {
-      return "全ての出入金";
+      return "全ての入出金";
     }
     const month = selectedDate.getMonth() + 1;
-    return `${month}月の出入金`;
+    return `${month}月の入出金`;
   };
 
   const getDescription = () => {
@@ -94,13 +96,24 @@ const AllTransactionsSection = ({ selectedDate }: AllTransactionsSectionProps) =
               key={transaction.id}
               sx={{
                 py: 2,
-                borderBottom: index < currentPageTransactions.length - 1 ? "1px solid" : "none",
+                borderBottom:
+                  index < currentPageTransactions.length - 1
+                    ? "1px solid"
+                    : "none",
                 borderColor: "divider",
               }}
             >
-              <Box display="flex" justifyContent="space-between" alignItems="flex-start">
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="flex-start"
+              >
                 <Box>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     {formatDate(transaction.date)}
                   </Typography>
                   <Typography variant="body2" fontWeight="medium" gutterBottom>
