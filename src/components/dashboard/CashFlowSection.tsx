@@ -63,6 +63,11 @@ const CashFlowSection = () => {
     }).format(amount);
   };
 
+  const formatBalanceForSankey = (amount: number) => {
+    const man = Math.round(amount / 10000);
+    return `${man}万円`;
+  };
+
   const truncateLabel = (label: string, maxLength = 10) => {
     if (label.length > maxLength) {
       return `${label.slice(0, maxLength)}...`;
@@ -197,7 +202,7 @@ const CashFlowSection = () => {
           <ResponsiveSankey
             data={sankeyData}
             margin={{
-              top: 20,
+              top: 40,
               right: isMobile ? 0 : 80, // 右マージンを増やす
               bottom: 20,
               left: isMobile ? 0 : 80, // 左マージンも少し増やす
@@ -248,7 +253,7 @@ const CashFlowSection = () => {
                   <g
                     transform={`translate(${
                       balanceNode.x + balanceNode.width / 2
-                    }, ${balanceNode.y - 10})`}
+                    }, ${balanceNode.y - 20})`}
                   >
                     <text
                       textAnchor="middle"
@@ -259,6 +264,17 @@ const CashFlowSection = () => {
                       }}
                     >
                       収支
+                    </text>
+                    <text
+                      textAnchor="middle"
+                      y={12} // 「収支」ラベルからの相対位置
+                      style={{
+                        fontSize: 10,
+                        fontWeight: "bold",
+                        fill: "#504e4eff",
+                      }}
+                    >
+                      {formatBalanceForSankey(totalIncome)}
                     </text>
                   </g>
                 );
