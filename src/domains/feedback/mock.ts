@@ -1,10 +1,10 @@
-export interface AIFeedback {
-  id: string;
+import { DatabaseEntity } from '../../core/database/interfaces';
+
+export interface AIFeedback extends DatabaseEntity {
   type: 'insight' | 'warning' | 'suggestion' | 'achievement';
   title: string;
   message: string;
   priority: 'high' | 'medium' | 'low';
-  createdAt: Date;
   actionable?: boolean;
   category: 'spending' | 'saving' | 'income' | 'budget' | 'goal';
 }
@@ -28,6 +28,7 @@ export const mockAIFeedbacks: AIFeedback[] = [
 > 📊 これらの実行で月**¥20,000**の節約が可能です`,
     priority: 'high',
     createdAt: new Date('2024-10-06'),
+    updatedAt: new Date('2024-10-06'),
     actionable: true,
     category: 'spending'
   },
@@ -47,6 +48,7 @@ export const mockAIFeedbacks: AIFeedback[] = [
 この調子で年間貯蓄目標の**¥1,200,000**達成が見込めます。`,
     priority: 'medium',
     createdAt: new Date('2024-10-05'),
+    updatedAt: new Date('2024-10-05'),
     actionable: false,
     category: 'saving'
   },
@@ -70,6 +72,7 @@ export const mockAIFeedbacks: AIFeedback[] = [
 > 💡 早期開始で**複利効果**を最大化できます`,
     priority: 'medium',
     createdAt: new Date('2024-10-04'),
+    updatedAt: new Date('2024-10-04'),
     actionable: true,
     category: 'goal'
   },
@@ -94,6 +97,7 @@ export const mockAIFeedbacks: AIFeedback[] = [
 - [ ] 住宅ローンの借り換え検討`,
     priority: 'low',
     createdAt: new Date('2024-10-03'),
+    updatedAt: new Date('2024-10-03'),
     actionable: true,
     category: 'income'
   },
@@ -119,6 +123,7 @@ export const mockAIFeedbacks: AIFeedback[] = [
 > 💰 本当に必要なサービスだけを残しましょう`,
     priority: 'medium',
     createdAt: new Date('2024-10-02'),
+    updatedAt: new Date('2024-10-02'),
     actionable: true,
     category: 'spending'
   }

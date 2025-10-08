@@ -1,6 +1,5 @@
-export interface User {
-  id: string;
+import { DatabaseEntity } from '../../core/database/interfaces';
+
+export interface User extends DatabaseEntity {
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
 }

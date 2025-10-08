@@ -1,7 +1,8 @@
+import { DatabaseEntity } from '../../core/database/interfaces';
+
 export type TransactionType = "income" | "expense";
 
-export interface Transaction {
-  id: string;
+export interface Transaction extends DatabaseEntity {
   userId: string;
   organizationId: string;
   type: TransactionType;
@@ -9,12 +10,9 @@ export interface Transaction {
   categoryId: string;
   description?: string;
   date: Date;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
-export interface TransactionCategory {
-  id: string;
+export interface TransactionCategory extends DatabaseEntity {
   name: string;
   icon?: string;
   color?: string;
