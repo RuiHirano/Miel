@@ -91,8 +91,12 @@ const CTASection = () => {
           {/* Benefits */}
           <Stack
             direction={isMobile ? "column" : "row"}
-            spacing={4}
-            sx={{ width: "100%", maxWidth: 800 }}
+            spacing={isMobile ? 2 : 4}
+            sx={{ 
+              width: "100%", 
+              maxWidth: 800,
+              alignItems: isMobile ? "center" : "stretch"
+            }}
           >
             {benefits.map((benefit, index) => (
               <Stack
@@ -100,7 +104,10 @@ const CTASection = () => {
                 direction="row"
                 spacing={1.5}
                 alignItems="center"
-                sx={{ flex: 1 }}
+                sx={{ 
+                  flex: 1,
+                  justifyContent: isMobile ? "center" : "flex-start"
+                }}
               >
                 <CheckCircleIcon
                   sx={{
@@ -113,7 +120,7 @@ const CTASection = () => {
                   variant="body1"
                   sx={{
                     opacity: 0.9,
-                    textAlign: isMobile ? "left" : "center",
+                    textAlign: "center",
                     fontSize: { xs: "0.875rem", md: "0.95rem" },
                   }}
                 >
