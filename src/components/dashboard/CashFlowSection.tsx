@@ -198,9 +198,9 @@ const CashFlowSection = () => {
             data={sankeyData}
             margin={{
               top: 20,
-              right: isMobile ? 80 : 150, // 右マージンを増やす
+              right: isMobile ? 0 : 80, // 右マージンを増やす
               bottom: 20,
-              left: isMobile ? 60 : 80, // 左マージンも少し増やす
+              left: isMobile ? 0 : 80, // 左マージンも少し増やす
             }}
             align="justify"
             colors={(d: any) => (d.data ? d.data.color : d.color) || "#757575"}
@@ -225,12 +225,17 @@ const CashFlowSection = () => {
                 viewBy === "description" ? 8 : 10
               )
             } // 摘要の場合は短めに
-            labelPosition="outside"
+            labelPosition="inside"
             labelOrientation="horizontal"
-            labelPadding={16}
-            labelTextColor={{
-              from: "color",
-              modifiers: [["darker", 1]],
+            labelPadding={8}
+            labelTextColor="#3c3a3aff"
+            theme={{
+              labels: {
+                text: {
+                  fontWeight: "bold",
+                  fontSize: 10,
+                },
+              },
             }}
             legends={[]}
             animate={false}
