@@ -4,28 +4,126 @@ const baseDate = new Date("2024-01-01T00:00:00");
 
 export const mockTransactionCategories: TransactionCategory[] = [
   // 支出カテゴリ
-  { id: "cat-1", name: "食費", icon: "🍽️", color: "#ff6b6b", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-2", name: "交通費", icon: "🚗", color: "#4ecdc4", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-3", name: "家賃", icon: "🏠", color: "#45b7d1", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-4", name: "光熱費", icon: "⚡", color: "#96ceb4", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-5", name: "通信費", icon: "📱", color: "#feca57", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-6", name: "医療費", icon: "🏥", color: "#ff9ff3", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-7", name: "娯楽費", icon: "🎮", color: "#54a0ff", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-8", name: "日用品", icon: "🧽", color: "#5f27cd", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-9", name: "衣服", icon: "👔", color: "#00d2d3", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-10", name: "教育費", icon: "📚", color: "#ff6348", createdAt: baseDate, updatedAt: baseDate },
-  
+  {
+    id: "cat-1",
+    name: "食費",
+    icon: "🍽️",
+    color: "#ff6b6b",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-2",
+    name: "交通費",
+    icon: "🚗",
+    color: "#4ecdc4",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-3",
+    name: "家賃",
+    icon: "🏠",
+    color: "#45b7d1",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-4",
+    name: "光熱費",
+    icon: "⚡",
+    color: "#96ceb4",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-5",
+    name: "通信費",
+    icon: "📱",
+    color: "#feca57",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-6",
+    name: "医療費",
+    icon: "🏥",
+    color: "#ff9ff3",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-7",
+    name: "娯楽費",
+    icon: "🎮",
+    color: "#54a0ff",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-8",
+    name: "日用品",
+    icon: "🧽",
+    color: "#5f27cd",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-9",
+    name: "衣服",
+    icon: "👔",
+    color: "#00d2d3",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-10",
+    name: "教育費",
+    icon: "📚",
+    color: "#ff6348",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+
   // 収入カテゴリ
-  { id: "cat-11", name: "給与", icon: "💰", color: "#2ed573", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-12", name: "副業", icon: "💻", color: "#3742fa", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-13", name: "投資", icon: "📈", color: "#ff4757", createdAt: baseDate, updatedAt: baseDate },
-  { id: "cat-14", name: "その他収入", icon: "💸", color: "#ffa502", createdAt: baseDate, updatedAt: baseDate },
+  {
+    id: "cat-11",
+    name: "給与",
+    icon: "💰",
+    color: "#2ed573",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-12",
+    name: "副業",
+    icon: "💻",
+    color: "#3742fa",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-13",
+    name: "投資",
+    icon: "📈",
+    color: "#ff4757",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
+  {
+    id: "cat-14",
+    name: "その他収入",
+    icon: "💸",
+    color: "#ffa502",
+    createdAt: baseDate,
+    updatedAt: baseDate,
+  },
 ];
 
 export const mockTransactions: Transaction[] = [
   {
     id: "txn-1",
-    userId: "user-1", 
+    userId: "user-1",
     organizationId: "org-1",
     type: "expense",
     amount: 1200,
@@ -38,9 +136,9 @@ export const mockTransactions: Transaction[] = [
   {
     id: "txn-2",
     userId: "user-1",
-    organizationId: "org-1", 
+    organizationId: "org-1",
     type: "expense",
-    amount: 300000,
+    amount: 140000,
     categoryId: "cat-3",
     description: "家賃（1月分）",
     date: new Date("2024-01-01T09:00:00"),
@@ -52,7 +150,7 @@ export const mockTransactions: Transaction[] = [
     userId: "user-1",
     organizationId: "org-1",
     type: "income",
-    amount: 500000,
+    amount: 400000,
     categoryId: "cat-11",
     description: "給与（1月分）",
     date: new Date("2024-01-25T10:00:00"),
@@ -148,9 +246,9 @@ export const mockTransactions: Transaction[] = [
     userId: "user-1",
     organizationId: "org-1",
     type: "expense",
-    amount: 1500,
+    amount: 15000,
     categoryId: "cat-1",
-    description: "夕食（スーパー）",
+    description: "スーパー",
     date: new Date("2024-01-16T18:00:00"),
     createdAt: new Date("2024-01-16T18:05:00"),
     updatedAt: new Date("2024-01-16T18:05:00"),
@@ -232,7 +330,7 @@ export const mockTransactions: Transaction[] = [
     userId: "user-1",
     organizationId: "org-1",
     type: "expense",
-    amount: 3200,
+    amount: 13200,
     categoryId: "cat-8",
     description: "キッチン用品",
     date: new Date("2024-01-19T14:30:00"),
@@ -267,29 +365,33 @@ export const mockTransactions: Transaction[] = [
 
 // カテゴリIDから名前を取得するヘルパー関数
 export const getCategoryName = (categoryId: string): string => {
-  const category = mockTransactionCategories.find(cat => cat.id === categoryId);
+  const category = mockTransactionCategories.find(
+    (cat) => cat.id === categoryId
+  );
   return category?.name || "不明";
 };
 
-// カテゴリIDからアイコンを取得するヘルパー関数  
+// カテゴリIDからアイコンを取得するヘルパー関数
 export const getCategoryIcon = (categoryId: string): string => {
-  const category = mockTransactionCategories.find(cat => cat.id === categoryId);
+  const category = mockTransactionCategories.find(
+    (cat) => cat.id === categoryId
+  );
   return category?.icon || "💰";
 };
 
 // 月別集計を取得するヘルパー関数
 export const getMonthlyTotals = (year: number, month: number) => {
-  const monthTransactions = mockTransactions.filter(txn => {
+  const monthTransactions = mockTransactions.filter((txn) => {
     const txnDate = new Date(txn.date);
     return txnDate.getFullYear() === year && txnDate.getMonth() === month - 1;
   });
 
   const totalIncome = monthTransactions
-    .filter(txn => txn.type === "income")
+    .filter((txn) => txn.type === "income")
     .reduce((sum, txn) => sum + txn.amount, 0);
 
   const totalExpense = monthTransactions
-    .filter(txn => txn.type === "expense")
+    .filter((txn) => txn.type === "expense")
     .reduce((sum, txn) => sum + txn.amount, 0);
 
   return {

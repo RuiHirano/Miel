@@ -167,9 +167,6 @@ const Demo: React.FC = () => {
           <Typography variant="body2" color="text.secondary">
             ※ デモモードで作成したデータは保存されません
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            ※ いつでも実際のデータモードに切り替え可能です
-          </Typography>
         </Box>
       </Stack>
     </Box>
