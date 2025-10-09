@@ -15,7 +15,7 @@ const Footer = () => {
       }}
     >
       <Typography variant="body2" color="text.secondary">
-        &copy; 2025 Miel. All rights reserved.
+        &copy; 2024 Miel. All rights reserved.
       </Typography>
     </Box>
   );
