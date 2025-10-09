@@ -31,7 +31,7 @@ const HomeHeader = () => {
             Miel
           </Typography>
         </Box>
-        <Button
+        {/*<Button
           color="inherit"
           onClick={() => navigate("/login")}
           sx={{
@@ -41,7 +41,7 @@ const HomeHeader = () => {
           }}
         >
           ログイン
-        </Button>
+        </Button>*/}
       </Toolbar>
     </AppBar>
   );

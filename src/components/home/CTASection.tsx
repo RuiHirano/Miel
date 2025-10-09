@@ -165,7 +165,7 @@ const CTASection = () => {
             <Button
               variant="outlined"
               size="large"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/demo")}
               sx={{
                 borderColor: alpha("#ffffff", 0.3),
                 color: "white",
