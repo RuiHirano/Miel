@@ -14,11 +14,8 @@ const Footer = () => {
         boxShadow: 1,
       }}
     >
-      <Typography
-        variant="body2"
-        color="text.secondary"
-      >
-        &copy; 2024 Miel. All rights reserved.
+      <Typography variant="body2" color="text.secondary">
+        &copy; 2025 Miel. All rights reserved.
       </Typography>
     </Box>
   );
