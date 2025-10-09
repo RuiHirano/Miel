@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const HomeHeader = () => {
