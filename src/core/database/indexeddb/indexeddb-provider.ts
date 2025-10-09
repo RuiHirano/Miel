@@ -50,6 +50,13 @@ export class IndexedDBProvider implements IDatabaseProvider {
             { name: 'category', keyPath: 'category' },
             { name: 'actionable', keyPath: 'actionable' }
           ]
+        },
+        {
+          name: 'financial_accounts',
+          keyPath: 'id',
+          indexes: [
+            { name: 'organizationId', keyPath: 'organizationId' }
+          ]
         }
       ]
     };

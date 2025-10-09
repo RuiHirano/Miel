@@ -2,6 +2,8 @@ import { DatabaseProviderFactory } from './database-provider';
 import { FeedbackService } from '../../domains/feedback/services/feedback-service';
 import { TransactionService } from '../../domains/transaction/services/transaction-service';
 import { mockAIFeedbacks } from '../../domains/feedback/mock';
+import { FinancialAccountService } from '../../domains/financialAccount/services/financial-account-service';
+import { mockFinancialAccounts } from '../../domains/financialAccount/mock';
 
 export class DatabaseInitializer {
   private static isInitialized = false;
@@ -27,8 +29,12 @@ export class DatabaseInitializer {
 
   private static async initializeWithMockData(): Promise<void> {
     const feedbackService = new FeedbackService();
+    const financialAccountService = new FinancialAccountService();
     
-    await feedbackService.initializeWithMockData(mockAIFeedbacks);
+    await Promise.all([
+      feedbackService.initializeWithMockData(mockAIFeedbacks),
+      financialAccountService.initializeWithMockData(mockFinancialAccounts)
+    ]);
     
     console.log('Mock data initialized');
   }
