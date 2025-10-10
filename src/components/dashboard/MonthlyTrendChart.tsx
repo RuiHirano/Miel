@@ -1,18 +1,21 @@
 import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
-import { ResponsiveLine } from "@nivo/line";
+import { line, curveMonotoneX } from "d3-shape";
 import {
   mockMonthlyData,
   transformToBarData,
-  transformToLineData,
   formatAmount,
 } from "../../utils/monthlyTrendData";
 
 const MonthlyTrendChart = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const barData = transformToBarData(mockMonthlyData);
-  const lineData = transformToLineData(mockMonthlyData);
+
+  // バーデータに収支（balance）を追加
+  const barData = transformToBarData(mockMonthlyData).map((item, index) => ({
+    ...item,
+    balance: mockMonthlyData[index].balance,
+  }));
 
   // データから最大値と最小値を計算
   const maxIncome = Math.max(...mockMonthlyData.map((d) => d.income));
@@ -30,6 +33,77 @@ const MonthlyTrendChart = () => {
     { length: 7 },
     (_, i) => minValue + gridStep * i
   );
+
+  // カスタムレイヤー: ラインチャート
+  const LineLayer = ({ bars, xScale, yScale }: any) => {
+    const lineColor = theme.palette.chart?.neutral || "#4B5563";
+
+    try {
+      // 各月ごとに最初のバーのみを取得（重複を避ける）
+      const seenIndices = new Set();
+      const uniqueBars = bars.filter((bar: any) => {
+        const index = bar.data.indexValue || bar.data.index;
+        if (seenIndices.has(index)) {
+          return false;
+        }
+        seenIndices.add(index);
+        return true;
+      });
+
+      // ラインデータを作成
+      const linePoints = uniqueBars
+        .map((bar: any) => {
+          const index = bar.data.indexValue || bar.data.index;
+          const bandwidth = xScale.bandwidth ? xScale.bandwidth() : 0;
+          const x = xScale(index) + bandwidth / 2;
+          const balance = bar.data.data?.balance || 0;
+          const y = yScale(balance);
+
+          return {
+            index,
+            x,
+            y,
+            balance,
+          };
+        })
+        .sort((a: any, b: any) => a.index.localeCompare(b.index));
+
+      // d3のlineジェネレーターを使用（曲線補間）
+      const lineGenerator = line<any>()
+        .x((d: any) => d.x)
+        .y((d: any) => d.y)
+        .curve(curveMonotoneX);
+
+      return (
+        <g>
+          {/* ライン */}
+          <path
+            d={lineGenerator(linePoints) || ""}
+            fill="none"
+            stroke={lineColor}
+            strokeWidth={2}
+            style={{ pointerEvents: "none" }}
+          />
+          {/* ポイント */}
+          {linePoints.map((point: any) => (
+            <circle
+              key={point.index}
+              cx={point.x}
+              cy={point.y}
+              r={2}
+              fill="#e2e2e2ff"
+              stroke={lineColor}
+              strokeWidth={1}
+              style={{ pointerEvents: "none" }}
+            />
+          ))}
+        </g>
+      );
+    } catch (error) {
+      console.error("LineLayer error:", error);
+      return null;
+    }
+  };
 
   return (
     <Box sx={{ height: 450, width: "100%", position: "relative" }}>
@@ -91,81 +165,7 @@ const MonthlyTrendChart = () => {
           enableLabel={false}
           legends={[]}
           animate={true}
-        />
-      </Box>
-
-      {/* ラインチャート */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          pointerEvents: "none",
-          zIndex: 1,
-        }}
-      >
-        <ResponsiveLine
-          data={lineData}
-          margin={{
-            top: 40,
-            right: isMobile ? 0 : 80,
-            bottom: 80,
-            left: isMobile ? 60 : 100,
-          }}
-          theme={{
-            axis: {
-              domain: {
-                line: {
-                  stroke: "transparent",
-                  strokeWidth: 0,
-                },
-              },
-            },
-          }}
-          xScale={{ type: "point" }}
-          yScale={{
-            type: "linear",
-            min: minValue,
-            max: maxValue,
-            stacked: false,
-            reverse: false,
-          }}
-          curve="monotoneX"
-          axisTop={null}
-          axisRight={null}
-          axisBottom={null}
-          axisLeft={null}
-          enableGridX={false}
-          enableGridY={false}
-          colors={[theme.palette.chart?.neutral || "#4B5563"]}
-          pointSize={8}
-          pointColor={{ theme: "background" }}
-          pointBorderWidth={2}
-          pointBorderColor={{ from: "serieColor" }}
-          pointLabelYOffset={-12}
-          useMesh={true}
-          animate={true}
-          enableSlices="x"
-          sliceTooltip={({ slice }) => (
-            <Box
-              sx={{
-                background: "white",
-                padding: "9px 12px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div>
-                <strong>{slice.points[0].data.xFormatted}</strong>
-              </div>
-              <div>
-                収支: {formatAmount(Number(slice.points[0].data.yFormatted))}
-              </div>
-            </Box>
-          )}
+          layers={["grid", "axes", "bars", LineLayer, "markers", "legends"]}
         />
       </Box>
 
