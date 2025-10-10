@@ -1,4 +1,4 @@
-import { Box, useTheme, useMediaQuery } from "@mui/material";
+import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 import {
@@ -40,9 +40,9 @@ const MonthlyTrendChart = () => {
           keys={["収入", "支出"]}
           indexBy="month"
           margin={{
-            top: 50,
-            right: isMobile ? 20 : 80,
-            bottom: 100,
+            top: 40,
+            right: isMobile ? 0 : 80,
+            bottom: 80,
             left: isMobile ? 60 : 100,
           }}
           padding={0.3}
@@ -57,10 +57,20 @@ const MonthlyTrendChart = () => {
             from: "color",
             modifiers: [["darker", 1.6]],
           }}
+          theme={{
+            axis: {
+              domain: {
+                line: {
+                  stroke: "#e0e0e0",
+                  strokeWidth: 1,
+                },
+              },
+            },
+          }}
           axisTop={null}
           axisRight={null}
           axisBottom={{
-            tickSize: 5,
+            tickSize: 0,
             tickPadding: 5,
             tickRotation: 0,
             legend: "",
@@ -68,7 +78,7 @@ const MonthlyTrendChart = () => {
             legendOffset: 32,
           }}
           axisLeft={{
-            tickSize: 5,
+            tickSize: 0,
             tickPadding: 5,
             tickRotation: 0,
             legend: "",
@@ -99,10 +109,20 @@ const MonthlyTrendChart = () => {
         <ResponsiveLine
           data={lineData}
           margin={{
-            top: 50,
-            right: isMobile ? 20 : 80,
-            bottom: 100,
+            top: 40,
+            right: isMobile ? 0 : 80,
+            bottom: 80,
             left: isMobile ? 60 : 100,
+          }}
+          theme={{
+            axis: {
+              domain: {
+                line: {
+                  stroke: "transparent",
+                  strokeWidth: 0,
+                },
+              },
+            },
           }}
           xScale={{ type: "point" }}
           yScale={{
@@ -157,48 +177,88 @@ const MonthlyTrendChart = () => {
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",
+          flexDirection: "row",
           alignItems: "center",
           gap: 3,
           zIndex: 2,
         }}
       >
         {/* 収入 */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 0.75,
+          }}
+        >
           <Box
             sx={{
               width: 16,
               height: 16,
               backgroundColor: theme.palette.chart?.income || "#2AA693",
               borderRadius: 0.5,
+              flexShrink: 0,
             }}
           />
-          <span style={{ fontSize: "14px", color: "#374151" }}>収入</span>
+          <Typography
+            variant="body2"
+            sx={{ fontSize: "14px", color: "#374151", whiteSpace: "nowrap" }}
+          >
+            収入
+          </Typography>
         </Box>
 
         {/* 支出 */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 0.75,
+          }}
+        >
           <Box
             sx={{
               width: 16,
               height: 16,
               backgroundColor: theme.palette.chart?.expense || "#DC2626",
               borderRadius: 0.5,
+              flexShrink: 0,
             }}
           />
-          <span style={{ fontSize: "14px", color: "#374151" }}>支出</span>
+          <Typography
+            variant="body2"
+            sx={{ fontSize: "14px", color: "#374151", whiteSpace: "nowrap" }}
+          >
+            支出
+          </Typography>
         </Box>
 
         {/* 収支 */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 0.75,
+          }}
+        >
           <Box
             sx={{
               width: 16,
               height: 2,
               backgroundColor: theme.palette.chart?.neutral || "#4B5563",
               borderRadius: 1,
+              flexShrink: 0,
             }}
           />
-          <span style={{ fontSize: "14px", color: "#374151" }}>収支</span>
+          <Typography
+            variant="body2"
+            sx={{ fontSize: "14px", color: "#374151", whiteSpace: "nowrap" }}
+          >
+            収支
+          </Typography>
         </Box>
       </Box>
     </Box>
