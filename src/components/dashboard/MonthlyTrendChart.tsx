@@ -14,6 +14,23 @@ const MonthlyTrendChart = () => {
   const barData = transformToBarData(mockMonthlyData);
   const lineData = transformToLineData(mockMonthlyData);
 
+  // データから最大値と最小値を計算
+  const maxIncome = Math.max(...mockMonthlyData.map((d) => d.income));
+  const maxExpense = Math.max(...mockMonthlyData.map((d) => d.expense));
+  const maxBalance = Math.max(...mockMonthlyData.map((d) => d.balance));
+  const minBalance = Math.min(...mockMonthlyData.map((d) => d.balance));
+
+  // Y軸の範囲を計算（余白を20%追加）
+  const maxValue = Math.max(maxIncome, maxBalance) * 1.2;
+  const minValue = Math.min(-maxExpense, minBalance) * 1.2;
+
+  // グリッド線を5段階に設定
+  const gridStep = (maxValue - minValue) / 6;
+  const gridValues = Array.from(
+    { length: 7 },
+    (_, i) => minValue + gridStep * i
+  );
+
   return (
     <Box sx={{ height: 450, width: "100%", position: "relative" }}>
       {/* バーチャート */}
@@ -26,12 +43,16 @@ const MonthlyTrendChart = () => {
             top: 50,
             right: isMobile ? 20 : 80,
             bottom: 100,
-            left: isMobile ? 60 : 100
+            left: isMobile ? 60 : 100,
           }}
           padding={0.3}
-          valueScale={{ type: "linear", min: -800000, max: 800000 }}
+          valueScale={{ type: "linear", min: minValue, max: maxValue }}
           indexScale={{ type: "band", round: true }}
-          colors={({ id }) => (id === "収入" ? theme.palette.chart?.income || "#2AA693" : theme.palette.chart?.expense || "#DC2626")}
+          colors={({ id }) =>
+            id === "収入"
+              ? theme.palette.chart?.income || "#2AA693"
+              : theme.palette.chart?.expense || "#DC2626"
+          }
           borderColor={{
             from: "color",
             modifiers: [["darker", 1.6]],
@@ -56,7 +77,7 @@ const MonthlyTrendChart = () => {
             format: (value) => formatAmount(value),
           }}
           enableGridY={true}
-          gridYValues={[-800000, -400000, 0, 400000, 800000]}
+          gridYValues={gridValues}
           enableLabel={false}
           legends={[]}
           animate={true}
@@ -70,7 +91,7 @@ const MonthlyTrendChart = () => {
           top: 0,
           left: 0,
           right: 0,
-          bottom: 50,
+          bottom: 0,
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -81,13 +102,13 @@ const MonthlyTrendChart = () => {
             top: 50,
             right: isMobile ? 20 : 80,
             bottom: 100,
-            left: isMobile ? 60 : 100
+            left: isMobile ? 60 : 100,
           }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
-            min: -800000,
-            max: 800000,
+            min: minValue,
+            max: maxValue,
             stacked: false,
             reverse: false,
           }}
