@@ -38,7 +38,7 @@ export const generateMonthlyData = (): MonthlyData[] => {
 
   // MonthlyData形式に変換
   return sortedEntries.map(([key, data]) => {
-    const [year, monthNum] = key.split("-");
+    const [, monthNum] = key.split("-");
     const month = parseInt(monthNum);
     return {
       month: `${month}月`,
@@ -53,7 +53,7 @@ export const mockMonthlyData: MonthlyData[] = generateMonthlyData();
 
 // バーチャート用のデータ変換
 export const transformToBarData = (data: MonthlyData[]) => {
-  return data.map(item => ({
+  return data.map((item) => ({
     month: item.month,
     収入: item.income,
     支出: -item.expense, // 支出は負の値で下向きに表示
@@ -66,7 +66,7 @@ export const transformToLineData = (data: MonthlyData[]) => {
     {
       id: "収支",
       color: "#424242",
-      data: data.map(item => ({
+      data: data.map((item) => ({
         x: item.month,
         y: item.balance,
       })),
