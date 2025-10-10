@@ -1,3 +1,5 @@
+import { mockTransactions } from "../domains/transaction/mock";
+
 // 月ごとの収支推移データ
 export interface MonthlyData {
   month: string;
@@ -6,38 +8,48 @@ export interface MonthlyData {
   balance: number;
 }
 
-export const mockMonthlyData: MonthlyData[] = [
-  {
-    month: "5月",
-    income: 500000,
-    expense: 400000,
-    balance: 100000,
-  },
-  {
-    month: "6月", 
-    income: 520000,
-    expense: 600000,
-    balance: -80000,
-  },
-  {
-    month: "7月",
-    income: 650000,
-    expense: 550000,
-    balance: 100000,
-  },
-  {
-    month: "8月",
-    income: 480000,
-    expense: 520000,
-    balance: -40000,
-  },
-  {
-    month: "9月",
-    income: 580000,
-    expense: 450000,
-    balance: 130000,
-  },
-];
+// mockTransactionsから月別データを生成
+export const generateMonthlyData = (): MonthlyData[] => {
+  // 年月ごとに集計
+  const monthlyMap = new Map<string, { income: number; expense: number }>();
+
+  mockTransactions.forEach((txn) => {
+    const date = new Date(txn.date);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const key = `${year}-${month.toString().padStart(2, "0")}`;
+
+    if (!monthlyMap.has(key)) {
+      monthlyMap.set(key, { income: 0, expense: 0 });
+    }
+
+    const data = monthlyMap.get(key)!;
+    if (txn.type === "income") {
+      data.income += txn.amount;
+    } else {
+      data.expense += txn.amount;
+    }
+  });
+
+  // キーでソートして配列に変換
+  const sortedEntries = Array.from(monthlyMap.entries()).sort(
+    ([keyA], [keyB]) => keyA.localeCompare(keyB)
+  );
+
+  // MonthlyData形式に変換
+  return sortedEntries.map(([key, data]) => {
+    const [year, monthNum] = key.split("-");
+    const month = parseInt(monthNum);
+    return {
+      month: `${month}月`,
+      income: data.income,
+      expense: data.expense,
+      balance: data.income - data.expense,
+    };
+  });
+};
+
+export const mockMonthlyData: MonthlyData[] = generateMonthlyData();
 
 // バーチャート用のデータ変換
 export const transformToBarData = (data: MonthlyData[]) => {
