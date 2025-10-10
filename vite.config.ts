@@ -13,17 +13,17 @@ export default defineConfig({
         icons: [
           {
             sizes: "192x192",
-            src: "miel-logo-transparent2-192.png",
+            src: "miel-logo-original-small3-192.png",
             type: "image/png",
           },
           {
             sizes: "512x512",
-            src: "miel-logo-transparent2-512.png",
+            src: "miel-logo-original-small3-512.png",
             type: "image/png",
           },
           {
             sizes: "512x512",
-            src: "miel-logo-transparent2-512.png",
+            src: "miel-logo-original-small3-512.png",
             type: "image/png",
             purpose: "maskable",
           },

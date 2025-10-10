@@ -16,8 +16,6 @@ const PricingSection = () => {
     "美しいデータ可視化",
     "シンプルで使いやすいUI",
     "AIによる分析機能",
-    "無制限のトランザクション",
-    "クラウド同期",
     "優先サポート",
   ];
 
@@ -259,6 +257,7 @@ const PricingSection = () => {
                   fontSize: { xs: "1rem", md: "1.1rem" },
                   fontWeight: 600,
                   borderRadius: 2,
+                  color: "white",
                   background:
                     "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
                   boxShadow: "0 8px 24px rgba(6, 182, 212, 0.3)",
