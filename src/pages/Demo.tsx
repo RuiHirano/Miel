@@ -9,6 +9,7 @@ import {
 import {
   Box,
   Button,
+  Container,
   List,
   ListItem,
   ListItemIcon,
@@ -69,7 +70,7 @@ const Demo: React.FC = () => {
   ];
 
   return (
-    <Box maxWidth="md" sx={{ py: 6 }}>
+    <Container maxWidth="md" sx={{ py: 6 }}>
       <Stack spacing={4}>
         {/* Header */}
         <Box textAlign="center">
@@ -169,7 +170,7 @@ const Demo: React.FC = () => {
           </Typography>
         </Box>
       </Stack>
-    </Box>
+    </Container>
   );
 };
 
