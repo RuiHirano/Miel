@@ -20,16 +20,35 @@ import {
 } from "../../utils/sankeyData";
 import { mockTransactions } from "../../domains/transaction/mock";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const CashFlowSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [viewBy, setViewBy] = useState("category"); // 'category' or 'description'
+  const [searchParams] = useSearchParams();
+
+  // URLからperiodパラメータを取得して年月を決定
+  const getPeriodFromUrl = () => {
+    const period = searchParams.get("period");
+    if (period && period.length === 6) {
+      const year = parseInt(period.substring(0, 4));
+      const month = parseInt(period.substring(4, 6));
+      if (!isNaN(year) && !isNaN(month) && month >= 1 && month <= 12) {
+        return { year, month };
+      }
+    }
+    // periodがない、または無効な場合は今月を返す
+    const now = new Date();
+    return { year: now.getFullYear(), month: now.getMonth() + 1 };
+  };
+
+  const { year, month } = getPeriodFromUrl();
 
   const sankeyData =
     viewBy === "category"
-      ? createSankeyData(2024, 1)
-      : createSankeyDataByDescription(2024, 1);
+      ? createSankeyData(year, month)
+      : createSankeyDataByDescription(year, month);
 
   const handleViewByChange = (
     _event: React.MouseEvent<HTMLElement>,
@@ -40,10 +59,10 @@ const CashFlowSection = () => {
     }
   };
 
-  // Calculate totals for the current month
+  // Calculate totals for the selected month
   const monthTransactions = mockTransactions.filter((txn) => {
     const txnDate = new Date(txn.date);
-    return txnDate.getFullYear() === 2024 && txnDate.getMonth() === 0; // January
+    return txnDate.getFullYear() === year && txnDate.getMonth() === month - 1;
   });
 
   const totalIncome = monthTransactions

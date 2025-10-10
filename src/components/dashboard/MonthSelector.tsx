@@ -2,7 +2,6 @@ import {
   CalendarMonth as CalendarMonthIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  Today as TodayIcon,
 } from "@mui/icons-material";
 import {
   Button,
@@ -24,22 +23,19 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  // selectedDateがnullの場合は今月を使用
+  const currentDate = selectedDate || new Date();
+
   const handlePreviousMonth = () => {
-    if (!selectedDate) return;
-    const newDate = new Date(selectedDate);
-    newDate.setMonth(selectedDate.getMonth() - 1);
+    const newDate = new Date(currentDate);
+    newDate.setMonth(currentDate.getMonth() - 1);
     onDateChange(newDate);
   };
 
   const handleNextMonth = () => {
-    if (!selectedDate) return;
-    const newDate = new Date(selectedDate);
-    newDate.setMonth(selectedDate.getMonth() + 1);
+    const newDate = new Date(currentDate);
+    newDate.setMonth(currentDate.getMonth() + 1);
     onDateChange(newDate);
-  };
-
-  const handleToday = () => {
-    onDateChange(new Date());
   };
 
   const formatMonth = (date: Date) => {
@@ -82,19 +78,9 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
     };
   });
 
-  const isCurrentMonth = () => {
-    if (!selectedDate) return false;
-    const now = new Date();
-    return (
-      selectedDate.getFullYear() === now.getFullYear() &&
-      selectedDate.getMonth() === now.getMonth()
-    );
-  };
-
   const isFutureMonth = () => {
-    if (!selectedDate) return false;
     const now = new Date();
-    return selectedDate > now;
+    return currentDate > now;
   };
 
   return (
@@ -103,67 +89,33 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
         p: 2,
       }}
     >
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
-      >
-        {/* Left side - Month navigation */}
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <CalendarMonthIcon
-            sx={{ mr: 1, fontSize: 28, color: "primary.main" }}
-          />
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <CalendarMonthIcon
+          sx={{ mr: 1, fontSize: 28, color: "primary.main" }}
+        />
 
-          <IconButton
-            onClick={handlePreviousMonth}
-            size="large"
-            disabled={!selectedDate}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
+        <IconButton onClick={handlePreviousMonth} size="large">
+          <ChevronLeftIcon />
+        </IconButton>
 
-          <Button
-            onClick={handleMonthMenuClick}
-            disabled={!selectedDate}
-            sx={{
-              fontSize: "1.2rem",
-              fontWeight: "medium",
-              minWidth: 160,
-            }}
-          >
-            {selectedDate ? formatMonth(selectedDate) : "全期間"}
-          </Button>
+        <Button
+          onClick={handleMonthMenuClick}
+          sx={{
+            fontSize: "1.2rem",
+            fontWeight: "medium",
+            minWidth: 160,
+          }}
+        >
+          {formatMonth(currentDate)}
+        </Button>
 
-          <IconButton
-            onClick={handleNextMonth}
-            disabled={!selectedDate || isFutureMonth()}
-            size="large"
-          >
-            <ChevronRightIcon />
-          </IconButton>
-        </Stack>
-
-        {/* Right side - Quick actions */}
-        <Stack direction="row" spacing={1}>
-          <Button
-            startIcon={<TodayIcon />}
-            onClick={handleToday}
-            disabled={isCurrentMonth()}
-            variant="outlined"
-            size="small"
-          >
-            今月
-          </Button>
-          <Button
-            onClick={() => onDateChange(null)}
-            disabled={!selectedDate}
-            variant="outlined"
-            size="small"
-          >
-            全期間
-          </Button>
-        </Stack>
+        <IconButton
+          onClick={handleNextMonth}
+          disabled={isFutureMonth()}
+          size="large"
+        >
+          <ChevronRightIcon />
+        </IconButton>
       </Stack>
 
       {/* Month selection menu */}
@@ -190,9 +142,8 @@ const MonthSelector = ({ selectedDate, onDateChange }: MonthSelectorProps) => {
             key={month.offset}
             onClick={() => handleMonthSelect(month.offset)}
             selected={
-              selectedDate !== null &&
-              month.date.getFullYear() === selectedDate.getFullYear() &&
-              month.date.getMonth() === selectedDate.getMonth()
+              month.date.getFullYear() === currentDate.getFullYear() &&
+              month.date.getMonth() === currentDate.getMonth()
             }
           >
             {month.label}

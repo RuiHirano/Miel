@@ -10,7 +10,7 @@ import { useOrganization } from "../hooks/useOrganization";
 
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const { currentOrganization, loading, error } = useOrganization();
 
   // Initialize date from URL params on mount
@@ -30,8 +30,8 @@ const Dashboard = () => {
         setSelectedDate(new Date());
       }
     } else {
-      // No period parameter means all periods
-      setSelectedDate(null);
+      // No period parameter, default to current month
+      setSelectedDate(new Date());
     }
   }, []);
 
@@ -39,16 +39,12 @@ const Dashboard = () => {
     setSelectedDate(date);
 
     // Update URL params
-    if (date === null) {
-      // Remove period parameter for all periods
-      setSearchParams({});
-    } else {
-      // Set period parameter in YYYYMM format
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, "0");
-      const period = `${year}${month}`;
-      setSearchParams({ period });
-    }
+    // Set period parameter in YYYYMM format
+    const currentDate = date || new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const period = `${year}${month}`;
+    setSearchParams({ period });
   };
 
   // Show loading state
