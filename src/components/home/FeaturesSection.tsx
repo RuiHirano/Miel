@@ -353,14 +353,12 @@ const FeaturesSection = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    minHeight: { xs: 200, md: 250 },
+                    minHeight: { xs: 250, md: 350 },
                   }}
                 >
                   <Box
                     sx={{
                       width: "100%",
-                      maxWidth: { xs: 350, md: 450 },
-                      height: { xs: 200, md: 250 },
                       borderRadius: 2,
                       overflow: "hidden",
                       boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
