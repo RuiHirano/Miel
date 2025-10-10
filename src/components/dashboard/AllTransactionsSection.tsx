@@ -89,162 +89,188 @@ const AllTransactionsSection = ({
       icon={<ReceiptLongIcon />}
       expandable
     >
-      {isMobile ? (
-        <Box>
-          {currentPageTransactions.map((transaction, index) => (
-            <Box
-              key={transaction.id}
-              sx={{
-                py: 2,
-                borderBottom:
-                  index < currentPageTransactions.length - 1
-                    ? "1px solid"
-                    : "none",
-                borderColor: "divider",
-              }}
-            >
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="flex-start"
-              >
-                <Box>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {formatDate(transaction.date)}
-                  </Typography>
-                  <Typography variant="body2" fontWeight="medium" gutterBottom>
-                    {getCategoryName(transaction.categoryId)}
-                  </Typography>
-                  {transaction.description && (
-                    <Typography variant="body2" color="text.secondary">
-                      {transaction.description}
-                    </Typography>
-                  )}
-                </Box>
-                <Box textAlign="right">
-                  <Typography
-                    variant="body1"
-                    fontWeight="bold"
-                    sx={{
-                      color:
-                        transaction.type === "income"
-                          ? theme.palette.chart?.income || "#2AA693"
-                          : theme.palette.chart?.expense || "#DC2626",
-                    }}
-                  >
-                    {formatAmount(transaction.amount, transaction.type)}
-                  </Typography>
-                  <Chip
-                    label={transaction.type === "income" ? "収入" : "支出"}
-                    size="small"
-                    variant="outlined"
-                    sx={{
-                      mt: 0.5,
-                      borderColor:
-                        transaction.type === "income"
-                          ? theme.palette.chart?.income || "#2AA693"
-                          : theme.palette.chart?.expense || "#DC2626",
-                      color:
-                        transaction.type === "income"
-                          ? theme.palette.chart?.income || "#2AA693"
-                          : theme.palette.chart?.expense || "#DC2626",
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Box>
-          ))}
+      {sortedTransactions.length === 0 ? (
+        <Box
+          sx={{
+            py: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "text.secondary",
+          }}
+        >
+          <ReceiptLongIcon sx={{ fontSize: 48, mb: 2, opacity: 0.3 }} />
+          <Typography variant="body1" color="text.secondary">
+            データがありません
+          </Typography>
         </Box>
       ) : (
-        <TableContainer component={Paper}>
-          <Table aria-label="取引履歴テーブル">
-            <TableHead>
-              <TableRow>
-                <TableCell>日時</TableCell>
-                <TableCell>カテゴリ</TableCell>
-                <TableCell>説明</TableCell>
-                <TableCell align="right">金額</TableCell>
-                <TableCell align="center">種別</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentPageTransactions.map((transaction) => (
-                <TableRow
+        <>
+          {isMobile ? (
+            <Box>
+              {currentPageTransactions.map((transaction, index) => (
+                <Box
                   key={transaction.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{
+                    py: 2,
+                    borderBottom:
+                      index < currentPageTransactions.length - 1
+                        ? "1px solid"
+                        : "none",
+                    borderColor: "divider",
+                  }}
                 >
-                  <TableCell>
-                    <Typography variant="body2" color="text.secondary">
-                      {formatDate(transaction.date)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2">
-                      {getCategoryName(transaction.categoryId)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2">
-                      {transaction.description || "—"}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      variant="body2"
-                      fontWeight="medium"
-                      sx={{
-                        color:
-                          transaction.type === "income"
-                            ? theme.palette.chart?.income || "#2AA693"
-                            : theme.palette.chart?.expense || "#DC2626",
-                      }}
-                    >
-                      {formatAmount(transaction.amount, transaction.type)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Chip
-                      label={transaction.type === "income" ? "収入" : "支出"}
-                      size="small"
-                      variant="outlined"
-                      sx={{
-                        borderColor:
-                          transaction.type === "income"
-                            ? theme.palette.chart?.income || "#2AA693"
-                            : theme.palette.chart?.expense || "#DC2626",
-                        color:
-                          transaction.type === "income"
-                            ? theme.palette.chart?.income || "#2AA693"
-                            : theme.palette.chart?.expense || "#DC2626",
-                      }}
-                    />
-                  </TableCell>
-                </TableRow>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Box>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        {formatDate(transaction.date)}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        fontWeight="medium"
+                        gutterBottom
+                      >
+                        {getCategoryName(transaction.categoryId)}
+                      </Typography>
+                      {transaction.description && (
+                        <Typography variant="body2" color="text.secondary">
+                          {transaction.description}
+                        </Typography>
+                      )}
+                    </Box>
+                    <Box textAlign="right">
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        sx={{
+                          color:
+                            transaction.type === "income"
+                              ? theme.palette.chart?.income || "#2AA693"
+                              : theme.palette.chart?.expense || "#DC2626",
+                        }}
+                      >
+                        {formatAmount(transaction.amount, transaction.type)}
+                      </Typography>
+                      <Chip
+                        label={transaction.type === "income" ? "収入" : "支出"}
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                          mt: 0.5,
+                          borderColor:
+                            transaction.type === "income"
+                              ? theme.palette.chart?.income || "#2AA693"
+                              : theme.palette.chart?.expense || "#DC2626",
+                          color:
+                            transaction.type === "income"
+                              ? theme.palette.chart?.income || "#2AA693"
+                              : theme.palette.chart?.expense || "#DC2626",
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-      {totalPages > 1 && (
-        <Stack spacing={2} alignItems="center" sx={{ mt: 2 }}>
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={handlePageChange}
-            color="primary"
-            size={isMobile ? "small" : "medium"}
-            showFirstButton={!isMobile}
-            showLastButton={!isMobile}
-          />
-          <Typography variant="body2" color="text.secondary">
-            {sortedTransactions.length}件中 {startIndex + 1}-
-            {Math.min(endIndex, sortedTransactions.length)}件を表示
-          </Typography>
-        </Stack>
+            </Box>
+          ) : (
+            <TableContainer component={Paper}>
+              <Table aria-label="取引履歴テーブル">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>日時</TableCell>
+                    <TableCell>カテゴリ</TableCell>
+                    <TableCell>説明</TableCell>
+                    <TableCell align="right">金額</TableCell>
+                    <TableCell align="center">種別</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {currentPageTransactions.map((transaction) => (
+                    <TableRow
+                      key={transaction.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell>
+                        <Typography variant="body2" color="text.secondary">
+                          {formatDate(transaction.date)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {getCategoryName(transaction.categoryId)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {transaction.description || "—"}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Typography
+                          variant="body2"
+                          fontWeight="medium"
+                          sx={{
+                            color:
+                              transaction.type === "income"
+                                ? theme.palette.chart?.income || "#2AA693"
+                                : theme.palette.chart?.expense || "#DC2626",
+                          }}
+                        >
+                          {formatAmount(transaction.amount, transaction.type)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Chip
+                          label={
+                            transaction.type === "income" ? "収入" : "支出"
+                          }
+                          size="small"
+                          variant="outlined"
+                          sx={{
+                            borderColor:
+                              transaction.type === "income"
+                                ? theme.palette.chart?.income || "#2AA693"
+                                : theme.palette.chart?.expense || "#DC2626",
+                            color:
+                              transaction.type === "income"
+                                ? theme.palette.chart?.income || "#2AA693"
+                                : theme.palette.chart?.expense || "#DC2626",
+                          }}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+          {totalPages > 1 && (
+            <Stack spacing={2} alignItems="center" sx={{ mt: 2 }}>
+              <Pagination
+                count={totalPages}
+                page={page}
+                onChange={handlePageChange}
+                color="primary"
+                size={isMobile ? "small" : "medium"}
+                showFirstButton={!isMobile}
+                showLastButton={!isMobile}
+              />
+              <Typography variant="body2" color="text.secondary">
+                {sortedTransactions.length}件中 {startIndex + 1}-
+                {Math.min(endIndex, sortedTransactions.length)}件を表示
+              </Typography>
+            </Stack>
+          )}
+        </>
       )}
     </SectionContainer>
   );
