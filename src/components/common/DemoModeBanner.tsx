@@ -92,10 +92,7 @@ export const DemoModeBanner: React.FC = () => {
               <Button
                 startIcon={<FeedbackIcon />}
                 onClick={() =>
-                  window.open(
-                    "https://docs.google.com/forms/d/e/1FAIpQLSdEqEmL9lfsz0_8sZGLRVu3i21Z9i-XqTQ6StbphJmQ7PZGdQ/viewform?usp=header",
-                    "_blank"
-                  )
+                  window.open("https://forms.gle/dT6rCbsmzbi6ARED8", "_blank")
                 }
                 variant="outlined"
               >

@@ -3,6 +3,7 @@ import {
   Psychology as AIIcon,
   Category as CategoryIcon,
   CheckCircle as CheckIcon,
+  Feedback as FeedbackIcon,
   Info as InfoIcon,
   PlayArrow as PlayIcon,
   TrendingUp as TrendingIcon,
@@ -106,13 +107,27 @@ const Demo: React.FC = () => {
             },
           }}
         >
-          <Stack spacing={1}>
-            <Typography variant="body1" fontWeight="medium">
-              現在、デモモードのみ提供しています
-            </Typography>
-            <Typography variant="body2">
-              よければご感想やご要望をお聞かせください。今後のサービス改善に役立てさせていただきます。
-            </Typography>
+          <Stack spacing={2}>
+            <Stack spacing={1}>
+              <Typography variant="body1" fontWeight="medium">
+                現在、デモモードのみ提供しています
+              </Typography>
+              <Typography variant="body2">
+                よければご感想やご要望をお聞かせください。今後のサービス改善に役立てさせていただきます。
+              </Typography>
+            </Stack>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                startIcon={<FeedbackIcon />}
+                onClick={() =>
+                  window.open("https://forms.gle/dT6rCbsmzbi6ARED8", "_blank")
+                }
+                variant="outlined"
+                size="small"
+              >
+                フィードバックを送る
+              </Button>
+            </Box>
           </Stack>
         </Alert>
 
