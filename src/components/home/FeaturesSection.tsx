@@ -25,31 +25,42 @@ const FeaturesSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const [videoUrl, setVideoUrl] = useState<string>("");
+  const [videoUrls, setVideoUrls] = useState<string[]>([]);
 
-  // Get video URL from S3
+  // Get video URLs from S3
   useEffect(() => {
-    const getVideoUrl = async () => {
+    const getVideoUrls = async () => {
       try {
-        const result = await getUrl({
-          path: "public/miel-demo-sample.mp4",
-          options: {
-            bucket: "mielFiles",
-          },
-        });
-        setVideoUrl(result.url.toString());
+        const videoFiles = [
+          "public/miel-sample-demo1.mp4",
+          "public/miel-sample-demo2.mp4",
+          "public/miel-sample-demo3.mp4",
+        ];
+
+        const urlPromises = videoFiles.map((path) =>
+          getUrl({
+            path,
+            options: {
+              bucket: "mielFiles",
+            },
+          })
+        );
+
+        const results = await Promise.all(urlPromises);
+        const urls = results.map((result) => result.url.toString());
+        setVideoUrls(urls);
       } catch (error) {
-        console.log(`Error loading video: ${error}`);
+        console.log(`Error loading videos: ${error}`);
       }
     };
 
-    getVideoUrl();
+    getVideoUrls();
   }, []);
 
   // Intersection Observer for auto-play videos on scroll
   useEffect(() => {
-    // Only set up observers if videoUrl is loaded
-    if (!videoUrl) return;
+    // Only set up observers if videoUrls are loaded
+    if (videoUrls.length === 0) return;
 
     const observers: IntersectionObserver[] = [];
 
@@ -83,7 +94,7 @@ const FeaturesSection = () => {
       clearTimeout(timer);
       observers.forEach((observer) => observer.disconnect());
     };
-  }, [videoUrl]);
+  }, [videoUrls]);
 
   const features: Feature[] = [
     {
@@ -92,7 +103,7 @@ const FeaturesSection = () => {
       description:
         "サンキーダイアグラム、チャート、グラフで収支を直感的に表示。複雑な家計データも一目で理解できます。",
       gradient: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
-      demoVideo: videoUrl,
+      demoVideo: videoUrls[0],
     },
     {
       icon: <LightbulbIcon sx={{ fontSize: 32 }} />,
@@ -100,7 +111,7 @@ const FeaturesSection = () => {
       description:
         "直感的なUIで誰でも簡単に使えます。複雑な機能をシンプルに整理し、ストレスフリーな家計管理を実現。",
       gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-      demoVideo: videoUrl,
+      demoVideo: videoUrls[1],
     },
     {
       icon: <TrendingUpIcon sx={{ fontSize: 32 }} />,
@@ -108,7 +119,7 @@ const FeaturesSection = () => {
       description:
         "AIが過去のデータを分析し、支出パターンや節約のチャンスを自動で発見。賢い家計管理をサポートします。",
       gradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      demoVideo: videoUrl,
+      demoVideo: videoUrls[2],
     },
   ];
 
