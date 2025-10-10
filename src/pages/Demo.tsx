@@ -123,7 +123,7 @@ const Demo: React.FC = () => {
                   window.open("https://forms.gle/dT6rCbsmzbi6ARED8", "_blank")
                 }
                 variant="outlined"
-                size="small"
+                size="medium"
               >
                 フィードバックを送る
               </Button>

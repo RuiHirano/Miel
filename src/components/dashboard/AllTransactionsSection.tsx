@@ -20,7 +20,7 @@ import {
   mockTransactions,
   getCategoryName,
 } from "../../domains/transaction/mock";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface AllTransactionsSectionProps {
   selectedDate: Date | null;
@@ -34,10 +34,24 @@ const AllTransactionsSection = ({
   const [page, setPage] = useState(1);
   const itemsPerPage = 50;
 
-  // 最新の取引から表示（日付降順）
-  const sortedTransactions = [...mockTransactions].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  // selectedDateがnullの場合は今月を使用
+  const currentDate = selectedDate || new Date();
+
+  // selectedDateが変更されたらページを1にリセット
+  useEffect(() => {
+    setPage(1);
+  }, [selectedDate]);
+
+  // 選択された月のトランザクションをフィルタリングして、日付降順でソート
+  const sortedTransactions = [...mockTransactions]
+    .filter((txn) => {
+      const txnDate = new Date(txn.date);
+      return (
+        txnDate.getFullYear() === currentDate.getFullYear() &&
+        txnDate.getMonth() === currentDate.getMonth()
+      );
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // ページネーション用の計算
   const totalPages = Math.ceil(sortedTransactions.length / itemsPerPage);
@@ -66,19 +80,13 @@ const AllTransactionsSection = ({
   };
 
   const getTitle = () => {
-    if (!selectedDate) {
-      return "全ての入出金";
-    }
-    const month = selectedDate.getMonth() + 1;
+    const month = currentDate.getMonth() + 1;
     return `${month}月の入出金`;
   };
 
   const getDescription = () => {
-    if (!selectedDate) {
-      return "全期間の取引履歴を一覧で確認し、詳細を管理できます";
-    }
-    const year = selectedDate.getFullYear();
-    const month = selectedDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
     return `${year}年${month}月の取引履歴を一覧で確認し、詳細を管理できます`;
   };
 
