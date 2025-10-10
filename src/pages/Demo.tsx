@@ -3,10 +3,12 @@ import {
   Psychology as AIIcon,
   Category as CategoryIcon,
   CheckCircle as CheckIcon,
+  Info as InfoIcon,
   PlayArrow as PlayIcon,
   TrendingUp as TrendingIcon,
 } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -92,6 +94,27 @@ const Demo: React.FC = () => {
             実際のデータを使わずに、すべての機能を自由にお試しいただけます
           </Typography>
         </Box>
+
+        {/* Info Message */}
+        <Alert
+          severity="info"
+          icon={<InfoIcon />}
+          sx={{
+            borderRadius: 2,
+            "& .MuiAlert-message": {
+              width: "100%",
+            },
+          }}
+        >
+          <Stack spacing={1}>
+            <Typography variant="body1" fontWeight="medium">
+              現在、デモモードのみ提供しています
+            </Typography>
+            <Typography variant="body2">
+              よければご感想やご要望をお聞かせください。今後のサービス改善に役立てさせていただきます。
+            </Typography>
+          </Stack>
+        </Alert>
 
         {/* Features */}
         <Paper elevation={1} sx={{ p: 4 }}>

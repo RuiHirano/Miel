@@ -1,4 +1,8 @@
-import { ExitToApp as ExitIcon, Info as InfoIcon } from "@mui/icons-material";
+import {
+  ExitToApp as ExitIcon,
+  Info as InfoIcon,
+  Feedback as FeedbackIcon,
+} from "@mui/icons-material";
 import {
   Alert,
   AlertTitle,
@@ -78,10 +82,27 @@ export const DemoModeBanner: React.FC = () => {
           デモモードを終了しますか？
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="exit-demo-dialog-description">
-            デモモードを終了すると、実際のデータを使用するモードに切り替わります。
-            デモモードで作成したデータは保持されません。
-          </DialogContentText>
+          <Box sx={{ mt: 2 }}>
+            <DialogContentText>
+              よろしければ、Mielについてのご感想やご要望をお聞かせください。
+              <br /> 3 問のみのため、回答に 1 分かかりません🙇
+            </DialogContentText>
+
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+              <Button
+                startIcon={<FeedbackIcon />}
+                onClick={() =>
+                  window.open(
+                    "https://docs.google.com/forms/d/e/1FAIpQLSdEqEmL9lfsz0_8sZGLRVu3i21Z9i-XqTQ6StbphJmQ7PZGdQ/viewform?usp=header",
+                    "_blank"
+                  )
+                }
+                variant="outlined"
+              >
+                フィードバックを送る
+              </Button>
+            </Box>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowExitDialog(false)}>キャンセル</Button>
