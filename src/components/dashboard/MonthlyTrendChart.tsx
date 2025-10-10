@@ -35,38 +35,23 @@ const MonthlyTrendChart = () => {
   );
 
   // カスタムレイヤー: ラインチャート
-  const LineLayer = ({ bars, xScale, yScale }: any) => {
+  const LineLayer = ({ xScale, yScale }: any) => {
     const lineColor = theme.palette.chart?.neutral || "#4B5563";
 
     try {
-      // 各月ごとに最初のバーのみを取得（重複を避ける）
-      const seenIndices = new Set();
-      const uniqueBars = bars.filter((bar: any) => {
-        const index = bar.data.indexValue || bar.data.index;
-        if (seenIndices.has(index)) {
-          return false;
-        }
-        seenIndices.add(index);
-        return true;
+      // mockMonthlyDataから直接ラインポイントを生成
+      const linePoints = mockMonthlyData.map((data) => {
+        const bandwidth = xScale.bandwidth ? xScale.bandwidth() : 0;
+        const x = xScale(data.month) + bandwidth / 2;
+        const y = yScale(data.balance);
+
+        return {
+          month: data.month,
+          x,
+          y,
+          balance: data.balance,
+        };
       });
-
-      // ラインデータを作成
-      const linePoints = uniqueBars
-        .map((bar: any) => {
-          const index = bar.data.indexValue || bar.data.index;
-          const bandwidth = xScale.bandwidth ? xScale.bandwidth() : 0;
-          const x = xScale(index) + bandwidth / 2;
-          const balance = bar.data.data?.balance || 0;
-          const y = yScale(balance);
-
-          return {
-            index,
-            x,
-            y,
-            balance,
-          };
-        })
-        .sort((a: any, b: any) => a.index.localeCompare(b.index));
 
       // d3のlineジェネレーターを使用（曲線補間）
       const lineGenerator = line<any>()
@@ -87,7 +72,7 @@ const MonthlyTrendChart = () => {
           {/* ポイント */}
           {linePoints.map((point: any) => (
             <circle
-              key={point.index}
+              key={point.month}
               cx={point.x}
               cy={point.y}
               r={2}
